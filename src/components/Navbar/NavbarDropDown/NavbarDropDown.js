@@ -6,7 +6,7 @@ const NavbarDropDown = (props) => {
   return (
     <div className="navbar-item">
       <div className="navbar-item has-dropdown  is-hoverable">
-        <Link className="navbar-item">
+        <Link className="navbar-item" to="/">
           {props.islogin ? <PersonOutlineSharpIcon /> : props.displayText}
         </Link>
 

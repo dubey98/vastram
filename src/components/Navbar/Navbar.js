@@ -1,4 +1,4 @@
-import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+//import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { Link } from "react-router-dom";
 import NavbarDropDown from "./NavbarDropDown/NavbarDropDown";
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
@@ -57,11 +57,6 @@ function Navbar() {
           <div className="navbar-end">
             <div className="control navbar-item is-expanded">
               <input className="input" type="text" placeholder="Search" />
-
-              {/* <SearchOutlinedIcon
-                style={{ fontSize: 20, textAlign: "center" }}
-                className="icon navbar-item is-small is-left"
-              /> */}
             </div>
 
             <NavbarDropDown islogin />
