@@ -14,8 +14,8 @@ export function postLogin(postData) {
     });
 }
 
-export function signup(postData) {
-  fetch(`${config.baseURL}/auth/signup`, {
+export async function signup(postData) {
+  return await fetch(`${config.baseURL}/auth/signup`, {
     method: "POST",
     body: JSON.stringify(postData),
     headers: {

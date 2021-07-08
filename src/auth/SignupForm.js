@@ -11,7 +11,7 @@ function SignupForm() {
   const [confirmPassword, setconfirmPassword] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     const user = {
       username,
       password,
@@ -19,7 +19,9 @@ function SignupForm() {
     };
 
     if (password === confirmPassword) {
-      signup(user);
+      const result = await signup(user);
+      if (result.error) {
+      }
     } else {
       alert("password and confirm passwords dont match");
     }
