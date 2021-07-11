@@ -9,7 +9,7 @@ const Auth = () => {
   let match = useRouteMatch();
 
   return (
-    <div className="section is-medium is-centered has-text-weight-light is-size6">
+    <section className="section is-medium is-centered has-text-weight-light is-size6">
       <div className="columns is-centered">
         <div className="column is-one-third has-text-centered content">
           <p className="has-text-weight-bold">Login Using :</p>
@@ -54,7 +54,7 @@ const Auth = () => {
           <SignupForm />
         </Route>
       </Switch>
-    </div>
+    </section>
   );
 };
 

@@ -1,7 +1,7 @@
 import config from "../config";
 
-export function postLogin(postData) {
-  fetch(`${config.baseURL}/auth/login`, {
+export async function postLogin(postData) {
+  return await fetch(`${config.baseURL}/auth/login`, {
     method: "POST",
     body: JSON.stringify(postData),
     headers: {
@@ -11,6 +11,7 @@ export function postLogin(postData) {
     .then((res) => res.json())
     .then((result) => {
       console.log(result);
+      return result;
     });
 }
 
@@ -25,5 +26,6 @@ export async function signup(postData) {
     .then((res) => res.json())
     .then((result) => {
       console.log(result);
+      return result;
     });
 }
