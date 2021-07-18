@@ -12,7 +12,7 @@ const Auth = () => {
     <section className="section is-medium is-centered has-text-weight-light is-size6">
       <div className="columns is-centered">
         <div className="column is-one-third has-text-centered content">
-          <p className="has-text-weight-bold">Login Using :</p>
+          <p className="has-text-weight-bold">Login Using</p>
           <nav className="level">
             <div className="level-item has-text-centered">
               <div>

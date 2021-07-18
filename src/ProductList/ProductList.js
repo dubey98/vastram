@@ -5,21 +5,18 @@ import Filter from "./../components/Filter/Filter";
 import img1 from "./women-kurta.webp";
 
 const ProductList = () => {
-  // const match = useRouteMatch();
-  const style = {
-    height: "500px",
-  };
+  const products = [
+    {
+      id: 34,
+      src: `/women-kurta.webp`,
+      imageAlt: "placeholder Image",
+      name: "Libas",
+      description: "Women Piches A line kurti",
+      offerPrice: 4500,
+      mrp: 7000,
+    },
+  ];
 
-  const products = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-
-  const brandCardData = {
-    src: `/women-kurta.webp`,
-    imageAlt: "placeholder Image",
-    name: "Libas",
-    description: "Women Piches A line kurti",
-    offerPrice: 4500,
-    mrp: 7000,
-  };
   return (
     <div>
       <div className="columns mr-2 ml-2 ">
@@ -28,7 +25,7 @@ const ProductList = () => {
         </div>
         <div className="column columns is-multiline is-centered is-10  m-0">
           {products.map((product, index) => {
-            return <ProductCard {...brandCardData} key={index} />;
+            return <ProductCard product={product} key={index} />;
           })}
         </div>
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 import "./ProductCard.scss";
 
 const ProductCard = (props) => {
-  const { src, imageAlt, name, description, offerPrice, mrp } = props;
+  const { src, imageAlt, name, description, offerPrice, mrp } = props.product;
 
   return (
     <div className="column is-one-fifth">
@@ -16,7 +16,12 @@ const ProductCard = (props) => {
           <div>
             <div className="has-text-weight-semibold">{name}</div>
             <div className="has-text-weight-light">{description}</div>
-            <div className="has-text-weight-semibold">Rs.{offerPrice}/-</div>
+            <div className="has-text-weight-semibold">
+              Rs.{offerPrice}/-{" "}
+              <span className="has-text-weight-light has-text-crossed is-italic">
+                Rs. {mrp}/-
+              </span>{" "}
+            </div>
           </div>
         </div>
       </div>

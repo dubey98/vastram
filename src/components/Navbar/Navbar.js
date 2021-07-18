@@ -31,26 +31,29 @@ function Navbar() {
           </Link>
         </div>
 
-        <div className="navbar-menu is-spaced">
+        <div className="navbar-menu is-spaced has-text-weight-semibold">
           <div className="navbar-start mr-4 ml-4">
-            <Link className="navbar-item   is-tab" to="/shop/men">
+            <Link className="navbar-item is-tab" to="/shop/men">
               MEN
             </Link>
 
-            <Link className="navbar-item mr-4 ml-4" to="/shop/women">
+            <Link className="navbar-item mr-4 ml-4 is-tab" to="/shop/women">
               WOMEN
             </Link>
 
-            <Link className="navbar-item mr-4 ml-4" to="/shop/kids">
+            <Link className="navbar-item mr-4 ml-4 is-tab" to="/shop/kids">
               KIDS
             </Link>
 
-            <Link className="navbar-item mr-4 ml-4" to="/shop/homeandliving">
+            <Link
+              className="navbar-item mr-4 ml-4 is-tab"
+              to="/shop/homeandliving"
+            >
               HOME & LIVING
             </Link>
 
-            <Link className="navbar-item mr-4 ml-4" to="/shop/beauty">
-              Beauty
+            <Link className="navbar-item mr-4 ml-4 is-tab" to="/shop/beauty">
+              BEAUTY
             </Link>
           </div>
 

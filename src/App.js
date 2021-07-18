@@ -31,9 +31,13 @@ function App() {
             <Route path="/shop/search">
               <ProductList />
             </Route>
-            <Route path="/shop">
-              <ShopFront categories={categories} />
-            </Route>
+            {categories.map((val, index) => {
+              return (
+                <Route path={`/shop/${val}`} key={index}>
+                  <ShopFront category="men" />
+                </Route>
+              );
+            })}
             <Route path="/auth">
               <Auth />
             </Route>

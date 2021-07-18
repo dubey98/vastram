@@ -88,7 +88,7 @@ function SignupForm() {
 
   return (
     <div className="columns is-centered">
-      <div className="column is-one-third">
+      <div className="column is-3">
         <div className="field">
           <label className="label">Email</label>
           <div className="control has-icons-left">

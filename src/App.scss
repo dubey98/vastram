@@ -13,4 +13,8 @@ body {
   border: 1px solid red;
 }
 
+.has-text-crossed {
+  text-decoration: line-through;
+}
+
 @import "../node_modules/bulma/bulma.sass";

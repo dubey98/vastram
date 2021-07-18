@@ -1,23 +1,31 @@
-import React from "react";
-import { Switch } from "react-router-dom";
-import { useRouteMatch, Route } from "react-router-dom";
-
+import React, { useState, useEffect } from "react";
 import HomeComponent from "../components/HomeConponent/HomeComponent";
+import { getFrontPageData } from "./../services/service";
 
 const ShopFront = (props) => {
-  const match = useRouteMatch();
-  console.log(props);
+  const [data, setData] = useState({ hits: [] });
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function fetchData() {
+      if (!ignore) {
+        console.log("making a request");
+        const result = await getFrontPageData(props.category);
+        setData(result.data);
+      }
+    }
+
+    fetchData();
+
+    return () => {
+      ignore = true;
+    };
+  }, [props.category]);
+
   return (
     <div>
-      <Switch>
-        {props.categories.map((value, index) => {
-          return (
-            <Route exact path={`${match.path}/${value}`} key={index}>
-              <HomeComponent category={value} />
-            </Route>
-          );
-        })}
-      </Switch>
+      <HomeComponent data={data} />
     </div>
   );
 };
