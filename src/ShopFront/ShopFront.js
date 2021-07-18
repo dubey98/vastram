@@ -1,10 +1,10 @@
 import React from "react";
-import { Switch, Link } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { useRouteMatch, Route } from "react-router-dom";
 
 import HomeComponent from "../components/HomeConponent/HomeComponent";
 
-const FrontPage = (props) => {
+const ShopFront = (props) => {
   const match = useRouteMatch();
   console.log(props);
   return (
@@ -22,4 +22,4 @@ const FrontPage = (props) => {
   );
 };
 
-export default FrontPage;
+export default ShopFront;

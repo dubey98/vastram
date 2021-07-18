@@ -3,7 +3,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { signup } from "./../_services/auth.service";
+import { signup } from "./../services/auth.service";
 import { useHistory } from "react-router-dom";
 
 function SignupForm() {

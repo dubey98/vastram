@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import css
-import "./App.scss";
 // import components
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Error from "./components/Error/Error";
-import FrontPage from "./FrontPage/FrontPage";
+import ShopFront from "./ShopFront/ShopFront";
 import Auth from "./auth/Auth";
+import ProductList from "./ProductList/ProductList";
+
+import "./App.scss";
 
 function App() {
   const categories = [
@@ -20,25 +21,35 @@ function App() {
   ];
   return (
     <Router>
-      <header className="block has-navbar-fixed-top is-family-sans-serif">
-        <Navbar />
-      </header>
-      <main className="main block is-family-sans-serif">
-        <Switch>
-          <Route path="/shop">
-            <FrontPage categories={categories} />
-          </Route>
-          <Route path="/auth">
-            <Auth />
-          </Route>
-          <Route path="*">
-            <Error />
-          </Route>
-        </Switch>
-      </main>
-      <footer className="footer block is-family-sans-serif">
-        <Footer />
-      </footer>
+      <div className="is-family-sans-serif">
+        <div className="block">
+          <Navbar />
+        </div>
+
+        <main className="block">
+          <Switch>
+            <Route path="/shop/search">
+              <ProductList />
+            </Route>
+            <Route path="/shop">
+              <ShopFront categories={categories} />
+            </Route>
+            <Route path="/auth">
+              <Auth />
+            </Route>
+            <Route path="/">
+              <ProductList />
+            </Route>
+            <Route path="*">
+              <Error />
+            </Route>
+          </Switch>
+        </main>
+
+        <div className="footer block">
+          <Footer />
+        </div>
+      </div>
     </Router>
   );
 }

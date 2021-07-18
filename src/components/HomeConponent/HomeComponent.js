@@ -17,7 +17,7 @@ const HomeComponent = (props) => {
     <div>
       {images.map((value, index) => (
         <section
-          className="hero bg-img is-fullheight-with-navbar block"
+          className="hero bg-img block is-fullheight-with-navbar"
           style={{ backgroundImage: `url(${value})` }}
           key={index}
         ></section>

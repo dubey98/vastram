@@ -1,7 +1,7 @@
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { useState } from "react";
-import { postLogin } from "./../_services/auth.service";
+import { postLogin } from "./../services/auth.service";
 import { useHistory } from "react-router-dom";
 
 function LoginForm() {

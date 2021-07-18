@@ -5,20 +5,16 @@ import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
 import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
 
 function Navbar() {
-  function handleMouseOver(e) {
-    console.log("hover on dropdown");
-  }
-
   return (
     <nav
-      className="navbar pt-1 pb-1 is-transparent is-fixed-top"
+      className="navbar is-transparent is-fixed-top"
       role="navigation"
       aria-label="main navigation"
     >
       <div className="container">
         <div className="navbar-brand mr-6 ml-6">
           <Link className="navbar-item" to="/shop/home">
-            <img src="\logo192.png" width="28" height="28" alt="Brand" />
+            <img src="\logo2.png" width="80" height="50" alt="Brand" />
           </Link>
 
           <Link
@@ -37,28 +33,8 @@ function Navbar() {
 
         <div className="navbar-menu is-spaced">
           <div className="navbar-start mr-4 ml-4">
-            <Link
-              className="navbar-item dropdown is-hoverable is-tab"
-              to="/shop/men"
-              onMouseOver={(e) => handleMouseOver(e)}
-            >
-              <div className="dropdown-trigger">MEN</div>
-              <div className="dropdown-menu">
-                <div className="dropdown-content columns">
-                  <div className="dropdown-item column">
-                    content in the dropdown
-                  </div>
-                  <div className="dropdown-item column">
-                    content in the dropdown
-                  </div>
-                  <div className="dropdown-item column">
-                    content in the dropdown
-                  </div>
-                  <div className="dropdown-item column">
-                    content in the dropdown
-                  </div>
-                </div>
-              </div>
+            <Link className="navbar-item   is-tab" to="/shop/men">
+              MEN
             </Link>
 
             <Link className="navbar-item mr-4 ml-4" to="/shop/women">
