@@ -1,7 +1,11 @@
 import axios from "axios";
 
-const url = "http://localhost:8080/api/v1/shop";
+const url = "http://localhost:8080/api/v1/shop/";
 
 export async function getFrontPageData(category) {
-  return await axios.get(url + "/" + category);
+  return await axios.get(url + category);
+}
+
+export async function getProductDetails(id) {
+  return await axios.get(url + id);
 }

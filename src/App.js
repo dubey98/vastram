@@ -9,6 +9,7 @@ import Auth from "./auth/Auth";
 import ProductList from "./ProductList/ProductList";
 
 import "./App.scss";
+import ProductDetail from "./ProductDetail/ProductDetail";
 
 function App() {
   const categories = [
@@ -38,6 +39,9 @@ function App() {
                 </Route>
               );
             })}
+            <Route path="/shop/">
+              <ProductDetail />
+            </Route>
             <Route path="/auth">
               <Auth />
             </Route>
