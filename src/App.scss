@@ -17,4 +17,14 @@ body {
   text-decoration: line-through;
 }
 
+.bg-img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.has-text-crossed {
+  text-decoration: line-through;
+}
+
 @import "../node_modules/bulma/bulma.sass";

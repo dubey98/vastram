@@ -1,11 +1,12 @@
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { useState } from "react";
-import { postLogin } from "./../services/auth.service";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "./use-auth";
 
 function LoginForm() {
   const history = useHistory();
+  const auth = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -23,20 +24,18 @@ function LoginForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const postData = {
-      email: email,
-      password: password,
+    const data = {
+      email,
+      password,
     };
-    const res = await postLogin(postData);
+    const { success, error } = await auth.signIn(data);
 
-    if (res && res.success === false) {
-      handleError(res.error);
-      return;
-    }
-    if (res.success === true) {
-      localStorage.setItem("token", res.token);
+    if (success) {
       history.push("/");
+    } else {
+      handleError(error);
     }
+    return;
   }
 
   function handleError(errors) {
@@ -62,7 +61,7 @@ function LoginForm() {
 
   return (
     <div className="hero-body columns is-centered">
-      <div className="column is-one-quarter is-centered">
+      <form className="column is-one-quarter is-centered">
         <div className="field">
           <label className="label">Email</label>
           <div className="control has-icons-left has-icons-right">
@@ -119,7 +118,7 @@ function LoginForm() {
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

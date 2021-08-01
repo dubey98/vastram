@@ -26,7 +26,9 @@ const ProductDetail = (props) => {
     async function fetchData() {
       const result = await getProductDetails();
       if (!ignore) {
-        setData(result.data.data);
+        if (result.success) {
+          setData(result.data.data);
+        }
       }
     }
 

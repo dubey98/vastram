@@ -1,10 +1,9 @@
-import React from "react";
-import { useRouteMatch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard/ProductCard";
 import Filter from "./../components/Filter/Filter";
-import img1 from "./women-kurta.webp";
+import { getProductList } from "./../services/service";
 
-const ProductList = () => {
+const ProductList = ({ category, filters }) => {
   const products = [
     {
       id: 34,
@@ -16,6 +15,21 @@ const ProductList = () => {
       mrp: 7000,
     },
   ];
+
+  useEffect(() => {
+    const ignore = false;
+
+    async function fetchData() {
+      const data = {
+        category: "Men",
+        filters: { Brand: "Adidas" },
+      };
+      const result = await getProductList(data);
+      console.log(result);
+    }
+    fetchData();
+    return () => {};
+  }, [category, filters]);
 
   return (
     <div>

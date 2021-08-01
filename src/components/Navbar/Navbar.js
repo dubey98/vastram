@@ -62,7 +62,7 @@ function Navbar() {
               <input className="input" type="text" placeholder="Search" />
             </div>
 
-            <NavbarDropDown islogin />
+            <NavbarDropDown />
 
             <Link className="navbar-item" to="/wishlist">
               <FavoriteBorderSharpIcon />

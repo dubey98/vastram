@@ -3,10 +3,11 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { signup } from "./../services/auth.service";
+import { useAuth } from "./use-auth";
 import { useHistory } from "react-router-dom";
 
 function SignupForm() {
+  const auth = useAuth();
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,22 +18,21 @@ function SignupForm() {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   async function handleSubmit(e) {
+    e.preventDefault();
     cleanAllErrorFields();
     if (!isInputValid()) {
       return;
     }
-    const postData = {
+    const data = {
       email,
       password,
       confirmPassword,
     };
-    const res = await signup(postData);
-    if (res && res.success === false) {
-      handleError(res.error);
-    }
-    if (res.success === true) {
-      localStorage.setItem("token", res.token);
+    const { success, error } = await auth.signUp(data);
+    if (success) {
       history.push("/");
+    } else {
+      handleError(error);
     }
     return;
   }
@@ -88,7 +88,7 @@ function SignupForm() {
 
   return (
     <div className="columns is-centered">
-      <div className="column is-3">
+      <form className="column is-3">
         <div className="field">
           <label className="label">Email</label>
           <div className="control has-icons-left">
@@ -159,7 +159,7 @@ function SignupForm() {
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

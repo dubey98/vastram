@@ -1,31 +1,31 @@
-import config from "../config";
+import service from "./axios.interceptor";
 
-export async function postLogin(postData) {
-  return await fetch(`${config.baseURL}/auth/login`, {
-    method: "POST",
-    body: JSON.stringify(postData),
-    headers: {
-      "content-type": "application/json;charset=UTF-8",
-    },
-  })
-    .then((res) => res.json())
-    .then((result) => {
-      console.log(result);
-      return result;
-    });
+async function signUp(postData) {
+  return await service.post("/auth/signup", postData);
 }
 
-export async function signup(postData) {
-  return await fetch(`${config.baseURL}/auth/signup`, {
-    method: "POST",
-    body: JSON.stringify(postData),
-    headers: {
-      "content-type": "application/json;charset=UTF-8",
-    },
-  })
-    .then((res) => res.json())
-    .then((result) => {
-      console.log(result);
-      return result;
-    });
+async function signIn(postData) {
+  return await service.post("/auth/login", postData);
 }
+
+async function signOut() {
+  console.log("signout called");
+}
+
+async function sendPasswordResetEmail(email) {
+  console.log("sendPasswordResetEmail called");
+}
+
+async function confirmPasswordReset(code, password) {
+  console.log("confirmPasswordReset called");
+}
+
+const authService = {
+  signIn,
+  signUp,
+  signOut,
+  sendPasswordResetEmail,
+  confirmPasswordReset,
+};
+
+export default authService;
