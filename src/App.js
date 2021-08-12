@@ -10,9 +10,13 @@ import ProductList from "./ProductList/ProductList";
 
 import "./App.scss";
 import ProductDetail from "./ProductDetail/ProductDetail";
-import { ProvideAuth } from "./auth/use-auth";
+import { ProvideAuth, useAuth } from "./auth/use-auth";
+import WishList from "./components/WishList/WishList";
+import CheckOut from "./checkout/CheckOut";
 
 function App() {
+  const auth = useAuth();
+
   const categories = [
     "Home",
     "Men",
@@ -21,48 +25,65 @@ function App() {
     "HomeAndLiving",
     "Beauty",
   ];
-
+  console.log(auth.user && auth.user.id);
   return (
-    <ProvideAuth>
-      <Router>
-        <div className="is-family-sans-serif">
-          <div className="block">
-            <Navbar />
-          </div>
-
-          <main className="block">
-            <Switch>
-              <Route path="/shop/search">
-                <ProductList />
-              </Route>
-              {categories.map((val, index) => {
-                return (
-                  <Route path={`/shop/${val}`} key={index}>
-                    <ShopFront category={val} />
-                  </Route>
-                );
-              })}
-              <Route path="/shop/">
-                <ProductDetail />
-              </Route>
-              <Route path="/auth">
-                <Auth />
-              </Route>
-              <Route path="/">
-                <ProductList />
-              </Route>
-              <Route path="*">
-                <Error />
-              </Route>
-            </Switch>
-          </main>
-
-          <div className="footer block">
-            <Footer />
-          </div>
+    <Router>
+      <div className="is-family-sans-serif">
+        <div className="block">
+          <Navbar />
         </div>
-      </Router>
-    </ProvideAuth>
+
+        <main className="block">
+          <Switch>
+            <Route path="/shop/search">
+              <ProductList />
+            </Route>
+            {categories.map((val, index) => {
+              return (
+                <Route path={`/shop/${val}`} key={index}>
+                  <ShopFront category={val} />
+                </Route>
+              );
+            })}
+            <Route path="/shop/:productId">
+              <ProductDetail />
+            </Route>
+            <Route path="/auth">
+              <Auth />
+            </Route>
+            {auth.user ? (
+              <Route path="/checkout">
+                <CheckOut id={auth.user.id} />
+              </Route>
+            ) : (
+              <Route path="/checkout">
+                <Error statusCode={403} />
+              </Route>
+            )}
+            {auth.user ? (
+              <Route path="/wishlist">
+                <WishList id={auth.user.id} />
+              </Route>
+            ) : (
+              <Route path="/wishlist">
+                <Error statusCode={403} />
+              </Route>
+            )}
+            <Route path="/">
+              <ProductList />
+            </Route>
+
+            <Route path="*">
+              <Error />
+            </Route>
+          </Switch>
+        </main>
+
+        <div className="footer block">
+          <Footer />
+        </div>
+      </div>
+    </Router>
   );
 }
 

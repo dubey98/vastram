@@ -1,43 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { getProductDetails } from "./../services/service";
+import { useParams } from "react-router-dom";
+import Loading from "./../components/Loading/Loading";
+import {
+  addProductToFavourites,
+  addProductTocart,
+} from "./../services/service";
 
-const ProductDetail = (props) => {
-  const [data, setData] = useState({
-    images: [
-      "http://localhost:8080/images/detail/m1.webp",
-      "http://localhost:8080/images/detail/m2.webp",
-      "http://localhost:8080/images/detail/m3.jpg",
-      "http://localhost:8080/images/detail/m4.webp",
-    ],
-    brandName: "BrandName",
-    brandDescription: "A little Description about the brand",
-    price: 4500,
-    mrpPrice: 9000,
-    discount: "20%",
-    summary: "Maroon solid T-shirt, has a round neck, short sleeves",
-    sizeFitDescription: "The model (height 6') is wearing a size M",
-    materialandcare: ["Cotton", "Rayon", "Machine wash"],
-  });
-  const [id] = useState(props.id);
+const ProductDetail = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const { productId } = useParams();
 
   useEffect(() => {
-    let ignore = false;
-
     async function fetchData() {
-      const result = await getProductDetails();
-      if (!ignore) {
-        if (result.success) {
-          setData(result.data.data);
-        }
-      }
+      const result = await getProductDetails(productId);
+      console.log(result.data.data);
+      setData(result.data.data);
+      setLoading(false);
     }
 
     fetchData();
+  }, [productId]);
 
-    return () => {
-      console.log("Product detail component unmounted");
+  async function handleAddToCartClick() {
+    const data = {
+      id: productId,
     };
-  }, [id]);
+    const result = await addProductTocart(data);
+    if (!result.data.success) {
+      console.log("An Error Happened", result.data);
+    }
+  }
+
+  async function handleAddToFavClick() {
+    const result = await addProductToFavourites(productId);
+    if (!result.data.success) {
+      console.log("An Error Happened", result.data);
+    }
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="columns m-0 is-half">
@@ -79,12 +85,20 @@ const ProductDetail = (props) => {
         <br />
         <div className="columns is-variable is-1 m-0">
           <div className="column is-half">
-            <button className="button is-success p-1 is-fullwidth">
+            <button
+              className="button is-success p-1 is-fullwidth"
+              onClick={async () => await handleAddToCartClick()}
+            >
               Add To Bag
             </button>
           </div>
           <div className="column is-half">
-            <button className="column button p-1 is-fullwidth">WishList</button>
+            <button
+              className="column button p-1 is-fullwidth"
+              onClick={async () => await handleAddToFavClick()}
+            >
+              WishList
+            </button>
           </div>
         </div>
         <div>

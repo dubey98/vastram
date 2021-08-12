@@ -24,15 +24,17 @@ const FilterItem = ({ title, filters }) => {
       <div className="p-1 has-text-weight-medium">
         {filterCheck.map((filter, index) => {
           return (
-            <div className="checkbox is-block" key={index}>
+            <div
+              className="checkbox is-block"
+              key={index}
+              onClick={() => handleFilterClick(index)}
+            >
               <input
                 type="checkbox"
                 className="mr-3"
-                checked={filter.checked}
+                defaultChecked={filterCheck.checked}
               />
-              <span onCLick={() => handleFilterClick(index)}>
-                {filter.value}
-              </span>
+              <span>{filter.value}</span>
             </div>
           );
         })}
@@ -45,8 +47,6 @@ const Filter = ({ category }) => {
   const [filters, setFilters] = useState([]);
 
   useEffect(() => {
-    let ignore = false;
-
     async function fetchData() {
       const result = await getFilters(category);
       if (result.success) {

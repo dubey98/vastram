@@ -29,10 +29,9 @@ function LoginForm() {
       password,
     };
     const { success, error } = await auth.signIn(data);
-
     if (success) {
       history.push("/");
-    } else {
+    } else if (error) {
       handleError(error);
     }
     return;

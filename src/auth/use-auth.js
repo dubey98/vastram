@@ -19,17 +19,21 @@ function useProvideAuth() {
 
   const signIn = async (data) => {
     const result = await authService.signIn(data);
-    if (!result.data.success) {
+    console.log(result, "result");
+    if (result && result.data && !result.data.success) {
       return { success: false, error: result.data.error };
-    } else {
+    } else if (result && result.data && result.data.success) {
       const token = result.data.token;
       localStorage.setItem("token", token);
       setUser({
         email: result.data.email,
-        id: jwt.decode(result.data.token.replace("Bearer ", "")).sub || "",
+        id: jwt.decode(result.data.token.replace("Bearer ", "")).sub.id || "",
       });
       console.log(user);
       return { success: true };
+    } else {
+      console.log(result, "result2");
+      return { success: false, error: "something went wrong" };
     }
   };
 
@@ -49,7 +53,7 @@ function useProvideAuth() {
       localStorage.setItem("token", token);
       setUser({
         email: result.data.email,
-        id: jwt.decode(result.data.token.replace("Bearer ", "")).sub || "",
+        id: jwt.decode(result.data.token.replace("Bearer ", "")).sub.id || "",
       });
       console.log(user);
       return { success: true };
@@ -65,10 +69,10 @@ function useProvideAuth() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const id = jwt.decode(token.replace("Bearer ", ""));
-    if (id) {
-      setUser({ id: id });
+    const token = localStorage.getItem("token") || "";
+    const data = jwt.decode(token.replace("Bearer ", ""));
+    if (data) {
+      setUser({ id: data.sub.id });
     }
   }, []);
 

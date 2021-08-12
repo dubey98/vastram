@@ -4,28 +4,16 @@ import Filter from "./../components/Filter/Filter";
 import { getProductList } from "./../services/service";
 
 const ProductList = ({ category, filters }) => {
-  const products = [
-    {
-      id: 34,
-      src: `/women-kurta.webp`,
-      imageAlt: "placeholder Image",
-      name: "Libas",
-      description: "Women Piches A line kurti",
-      offerPrice: 4500,
-      mrp: 7000,
-    },
-  ];
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const ignore = false;
-
     async function fetchData() {
       const data = {
         category: "Men",
         filters: { Brand: "Adidas" },
       };
       const result = await getProductList(data);
-      console.log(result);
+      setProducts(result.data.products);
     }
     fetchData();
     return () => {};

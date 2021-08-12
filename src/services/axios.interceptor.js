@@ -9,9 +9,7 @@ const customAxios = axios.create({
 // Add the token to the request
 const reqHandler = (req) => {
   const token = localStorage.getItem("token");
-
   req.headers.Authorization = token || "";
-
   return req;
 };
 
