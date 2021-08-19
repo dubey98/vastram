@@ -53,3 +53,14 @@ export async function getFavouriteList(userId) {
   console.log({ userId });
   return await service.get("user/favourite/" + userId.toString());
 }
+
+export async function getAddressList() {
+  return await service.get("user/address").then((result) => result.data);
+}
+
+export async function createNewAddress(data) {
+  return await service
+    .post("user/address", data)
+    .then((result) => result.data)
+    .catch((result) => result.error);
+}

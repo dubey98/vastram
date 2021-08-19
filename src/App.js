@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import components
 import Navbar from "./components/Navbar/Navbar";
@@ -10,7 +10,7 @@ import ProductList from "./ProductList/ProductList";
 
 import "./App.scss";
 import ProductDetail from "./ProductDetail/ProductDetail";
-import { ProvideAuth, useAuth } from "./auth/use-auth";
+import { useAuth } from "./auth/use-auth";
 import WishList from "./components/WishList/WishList";
 import CheckOut from "./checkout/CheckOut";
 
@@ -25,7 +25,7 @@ function App() {
     "HomeAndLiving",
     "Beauty",
   ];
-  console.log(auth.user && auth.user.id);
+
   return (
     <Router>
       <div className="is-family-sans-serif">

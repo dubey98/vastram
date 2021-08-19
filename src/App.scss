@@ -17,6 +17,11 @@ body {
   text-decoration: line-through;
 }
 
+.has-border-success {
+  border: 1px solid green;
+  border-radius: 10px;
+}
+
 .bg-img {
   background-repeat: no-repeat;
   background-size: cover;
