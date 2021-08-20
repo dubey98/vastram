@@ -5,6 +5,7 @@ import { getProductList } from "./../services/service";
 
 const ProductList = ({ category, filters }) => {
   const [products, setProducts] = useState([]);
+  const [activeFilters, setActiveFilters] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -25,10 +26,18 @@ const ProductList = ({ category, filters }) => {
         <div className="column is-2">
           <Filter />
         </div>
-        <div className="column columns is-multiline is-centered is-10  m-0">
-          {products.map((product, index) => {
-            return <ProductCard product={product} key={index} />;
-          })}
+        <div className="column is-10  m-0">
+          <div className="tags are-medium ">
+            <span className="tag is-rounded is-info is-light">
+              ADIDAS
+              <button className="delete"></button>
+            </span>
+          </div>
+          <div className="columns is-multiline is-centered">
+            {products.map((product, index) => {
+              return <ProductCard product={product} key={index} />;
+            })}
+          </div>
         </div>
       </div>
     </div>

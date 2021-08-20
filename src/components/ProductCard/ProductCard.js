@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./ProductCard.scss";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { useAuth } from "./../../auth/use-auth";
 import { addProductToFavourites } from "./../../services/service";
 
 const ProductCard = (props) => {

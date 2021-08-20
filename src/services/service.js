@@ -36,13 +36,8 @@ export async function removeProductFromCart(data) {
   return await service.post("/user/removefromcart", { ...data });
 }
 
-export async function getCartData(id) {
-  return await service.get("/user/getcart", {
-    params: { id: id.toString() },
-    paramsSerializer: (params) => {
-      return qs.stringify(params);
-    },
-  });
+export async function getCartData() {
+  return await service.get("/user/getcart");
 }
 
 export async function addProductToFavourites(id) {
