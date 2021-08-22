@@ -1,8 +1,12 @@
 import service from "./axios.interceptor";
 import qs from "qs";
 
+export async function getHomePageData() {
+  return await service.get("shop/").then((result) => result.data);
+}
+
 export async function getFrontPageData(category) {
-  return await service.get("shop/" + category);
+  return await service.get("shop/" + category).then((result) => result.data);
 }
 
 export async function getProductDetails(id) {
@@ -20,12 +24,8 @@ export async function getProductList(data) {
   });
 }
 
-export async function getFilters(category) {
-  return await service
-    .get("/shop/filters", {
-      params: { category: category },
-    })
-    .then((result) => result.data);
+export async function getFilters() {
+  return await service.get("/shop/filters").then((result) => result.data);
 }
 
 export async function addProductTocart(data) {

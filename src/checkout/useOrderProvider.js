@@ -26,6 +26,7 @@ function useOrderProvider() {
   const [addressList, setAddressList] = useState(null);
   const [addressLoading, setAddressLoading] = useState(true);
   const [addressFormOpen, setAddressFormOpen] = useState(false);
+  const [reloadAddress, setReloadAddress] = useState(false);
 
   useEffect(() => {
     let loadingBarLimit = 0;
@@ -64,12 +65,9 @@ function useOrderProvider() {
 
   useEffect(() => {
     async function fetchData() {
-      console.log("fetching data");
       const result = await getCartData();
       setOrderItems(result.data.cart || []);
       setOrderItemsLoading(false);
-
-      console.log("Order Items reload");
     }
 
     fetchData();
@@ -83,9 +81,8 @@ function useOrderProvider() {
         setAddressLoading(false);
       }
     }
-
     fetchData();
-  }, []);
+  }, [reloadAddress]);
 
   function handleBackButtonClick() {
     if (progress === 0) {
@@ -137,7 +134,7 @@ function useOrderProvider() {
 
   function handleChooseAddressClick(e, id) {
     const tempChosenAddress = addressList.find((address) => {
-      return address.id == id;
+      return address.id === id;
     });
 
     setChosenAddress(tempChosenAddress);
@@ -149,6 +146,10 @@ function useOrderProvider() {
 
   function closeAddressForm() {
     setAddressFormOpen(false);
+  }
+
+  function handleReloadAddress() {
+    setReloadAddress(!reloadAddress);
   }
 
   return {
@@ -169,6 +170,7 @@ function useOrderProvider() {
     handleChooseAddressClick,
     openAddressForm,
     closeAddressForm,
+    handleReloadAddress,
   };
 }
 

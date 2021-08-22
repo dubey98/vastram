@@ -1,84 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { getFilters } from "../../services/service";
-
-const FilterItem = ({ title, filters }) => {
-  const [filterCheck, setFilterCheck] = useState([]);
-
-  useEffect(() => {
-    const tempFilterCheck = [];
-    filters.forEach((val) => {
-      tempFilterCheck.push({ value: val, checked: false });
-    });
-    setFilterCheck(tempFilterCheck);
-  }, [title, filters]);
-
-  function handleFilterClick(index) {
-    const tempFilterCheck = [...filterCheck];
-    tempFilterCheck[index].checked = true;
-    setFilterCheck(tempFilterCheck);
+function Filter({ filterCategory, filterList, handleFilterChange }) {
+  function mapFilterValues(category) {
+    let filters = [];
+    for (let i = 0; i < filterList.length; i++) {
+      if (filterList[i].category === category) {
+        let filter = (
+          <div key={filterList[i].value}>
+            <input
+              type="checkbox"
+              className="mr-3"
+              checked={filterList[i].checked}
+              onChange={() =>
+                handleFilterChange(
+                  filterList[i].category,
+                  filterList[i].value,
+                  !filterList[i].checked
+                )
+              }
+            />
+            {filterList[i].value}
+          </div>
+        );
+        filters.push(filter);
+      }
+    }
+    return filters;
   }
 
   return (
-    <div className="block">
-      <div className="has-text-weight-bold is-uppercase">{title}</div>
-      <div className="p-1 has-text-weight-medium">
-        {filterCheck.map((filter, index) => {
-          return (
-            <div
-              className="checkbox is-block"
-              key={index}
-              onClick={() => handleFilterClick(index)}
-            >
-              <input
-                type="checkbox"
-                className="mr-3"
-                defaultChecked={filterCheck.checked}
-              />
-              <span>{filter.value}</span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
-const Filter = ({ category }) => {
-  const [filters, setFilters] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const result = await getFilters(category);
-      if (result.success) {
-        setFilters(result.data);
-      } else {
-        setFilters([]);
-      }
-    }
-
-    fetchData();
-  }, [category]);
-
-  return (
     <div>
-      <div>
-        <div
-          className="has-text-weight-bold has-text-left is-uppercase is-size-5"
-          style={{ float: "left" }}
-        >
-          Filters
-        </div>
-        <div className="has-text-right ">Clear All</div>
-      </div>
-      <div className="p-3 content is-clearfix">
-        {filters.map((val, index) => {
-          return (
-            <FilterItem title={val.title} filters={val.filters} key={index} />
-          );
-        })}
-      </div>
+      {filterCategory.map((category, index) => {
+        return (
+          <div key={index}>
+            <div className="has-text-weight-bold is-uppercase">{category}</div>
+            <div className="has-text-weight-medium">
+              {mapFilterValues(category)}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
-};
+}
 
 export default Filter;

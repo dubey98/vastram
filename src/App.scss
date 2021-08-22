@@ -32,4 +32,8 @@ body {
   text-decoration: line-through;
 }
 
+.has-fullheight-content {
+  height: 100%;
+}
+
 @import "../node_modules/bulma/bulma.sass";

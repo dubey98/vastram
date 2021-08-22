@@ -1,57 +1,86 @@
 import React from "react";
 import PersonOutlineSharpIcon from "@material-ui/icons/PersonOutlineSharp";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../../auth/use-auth";
 
-const NavbarDropDown = ({ user }) => {
+const NavbarDropDown = ({ burgerVisible }) => {
   const auth = useAuth();
+  const history = useHistory();
+
+  if (burgerVisible) {
+    return (
+      <div className="navbar-item">
+        <div className="is-arrowless">
+          <div
+            className="navbar-item is-clickable"
+            onClick={() =>
+              auth.user ? history.push("/user") : history.push("login")
+            }
+          >
+            {auth.user ? "Your Account" : "Login"}
+          </div>
+          <div
+            className="navbar-item is-clickable"
+            onClick={() =>
+              auth.user ? history.push("/orders") : history.push("/signup")
+            }
+          >
+            {auth.user ? "Your orders" : "SignUp"}
+          </div>
+          <div
+            className="navbar-item is-clickable"
+            onClick={(e) => {
+              auth.user ? auth.signOut() : history.push("/contact");
+            }}
+          >
+            {auth.user ? "Sign out" : "Contact"}
+          </div>
+
+          <Link className="navbar-item is-clickable" to="/support">
+            Report an issue
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="navbar-item">
-      <div className="navbar-item has-dropdown  is-hoverable">
-        <Link className="navbar-item" to="/">
-          <PersonOutlineSharpIcon />
-        </Link>
+      <div className="navbar-item has-dropdown is-hoverable">
+        <PersonOutlineSharpIcon />
 
-        {auth.user ? (
-          <div className="navbar-dropdown is-arrowless is-right">
-            <Link className="navbar-item" to="/user">
-              Your Account
-            </Link>
-            <Link className="navbar-item" to="/user/orders">
-              Your orders
-            </Link>
-            <Link
-              className="navbar-item"
-              to="/auth/signout"
-              onClick={(e) => {
-                auth.signOut();
-              }}
-            >
-              Sign out
-            </Link>
-            <hr className="navbar-divider" />
-            <Link className="navbar-item" to="/support">
-              Report an issue
-            </Link>
+        <div className="navbar-dropdown is-arrowless is-right">
+          <div
+            className="navbar-item is-clickable"
+            onClick={() =>
+              auth.user ? history.push("/user") : history.push("/auth/login")
+            }
+          >
+            {auth.user ? "Your Account" : "Login"}
           </div>
-        ) : (
-          <div className="navbar-dropdown is-arrowless is-right">
-            <Link className="navbar-item" to="/auth/login">
-              Login
-            </Link>
-            <Link className="navbar-item" to="/auth/signup">
-              Signup
-            </Link>
-            <Link className="navbar-item" to="/contact">
-              Contact
-            </Link>
-            <hr className="navbar-divider" />
-            <Link className="navbar-item" to="/support">
-              Report an issue
-            </Link>
+          <div
+            className="navbar-item is-clickable"
+            onClick={() =>
+              auth.user
+                ? history.push("/user/orders")
+                : history.push("/auth/signup")
+            }
+          >
+            {auth.user ? "Your orders" : "SignUp"}
           </div>
-        )}
+          <div
+            className="navbar-item is-clickable"
+            onClick={() =>
+              auth.user ? auth.signOut() : history.push("/contact")
+            }
+          >
+            {auth.user ? "Sign out" : "Contact"}
+          </div>
+          <hr className="navbar-divider" />
+          <div className="navbar-item is-clickable " to="/support">
+            Report an issue
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ const ProductCard = (props) => {
   }
 
   return (
-    <div className="column is-one-fifth">
+    <div className="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet">
       <div className="card">
         <div className="card-image">
           <figure className="image is-4by5">
@@ -41,7 +41,7 @@ const ProductCard = (props) => {
           </figure>
         </div>
         <Link to={`/shop/${id}`}>
-          <div className="card-content ">
+          <div className="card-content">
             <p className="">
               <strong className="">{name}</strong>
               <br />

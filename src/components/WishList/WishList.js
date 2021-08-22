@@ -16,8 +16,8 @@ const WishList = (props) => {
   }, [userId]);
 
   return (
-    <div className="container test">
-      <div className="columns is-multiline is-10  m-0 test ">
+    <div className="container">
+      <div className="columns is-multiline is-10  m-0 ">
         {products.map((product, index) => {
           return <ProductCard product={product} key={index} />;
         })}

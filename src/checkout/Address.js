@@ -51,7 +51,10 @@ const Address = () => {
               <article className="media">
                 <div className="media-content content">
                   {value.addressFormOpen ? (
-                    <AddAddress closeAddressForm={value.closeAddressForm} />
+                    <AddAddress
+                      closeAddressForm={value.closeAddressForm}
+                      reloadAddress={value.handleReloadAddress}
+                    />
                   ) : (
                     <button
                       className="button has-text-centered"
@@ -70,7 +73,7 @@ const Address = () => {
   );
 };
 
-function AddAddress({ closeAddressForm }) {
+function AddAddress({ closeAddressForm, reloadAddress }) {
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
   const [mobile, setMobile] = useState("");
@@ -139,6 +142,7 @@ function AddAddress({ closeAddressForm }) {
     const result = await createNewAddress(data);
     if (result.success) {
       closeAddressForm();
+      reloadAddress();
     } else {
       handleErrors(result.errors);
     }
@@ -163,7 +167,6 @@ function AddAddress({ closeAddressForm }) {
 
   function handleErrors(errors) {
     if (Array.isArray(errors) && errors.length > 0) {
-      console.log(errors);
       errors.forEach((error) => {
         stateMapping[error.param](error.msg);
       });
@@ -184,7 +187,7 @@ function AddAddress({ closeAddressForm }) {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <p className="help is-success">{nameError}</p>
+            <p className="help is-danger">{nameError}</p>
           </div>
           <div className="field">
             <div className="control ">
@@ -196,7 +199,7 @@ function AddAddress({ closeAddressForm }) {
                 onChange={(e) => setMobile(e.target.value)}
               />
             </div>
-            <p className="help is-success">{mobileError}</p>
+            <p className="help is-danger">{mobileError}</p>
           </div>
         </div>
       </div>
@@ -226,7 +229,7 @@ function AddAddress({ closeAddressForm }) {
                 onChange={(e) => setCity(e.target.value)}
               />
             </div>
-            <p className="help is-success">{cityError}</p>
+            <p className="help is-danger">{cityError}</p>
           </div>
           <div className="field">
             <div className="control ">
@@ -238,7 +241,7 @@ function AddAddress({ closeAddressForm }) {
                 onChange={(e) => setLocality(e.target.value)}
               />
             </div>
-            <p className="help is-success">{localityError}</p>
+            <p className="help is-danger">{localityError}</p>
           </div>
         </div>
       </div>
@@ -255,7 +258,7 @@ function AddAddress({ closeAddressForm }) {
                 onChange={(e) => setPincode(e.target.value)}
               />
             </div>
-            <p className="help is-success">{pincodeError}</p>
+            <p className="help is-danger">{pincodeError}</p>
           </div>
           <div className="field">
             <div className="control">
@@ -275,7 +278,7 @@ function AddAddress({ closeAddressForm }) {
                 </select>
               </div>
             </div>
-            <p className="help is-success">{stateError}</p>
+            <p className="help is-danger">{stateError}</p>
           </div>
         </div>
       </div>
@@ -314,7 +317,7 @@ function AddAddress({ closeAddressForm }) {
       <div className="field is-grouped">
         <div className="control">
           <button
-            className="button is-link"
+            className="button is-success"
             type="submit"
             onClick={async (e) => await handleSubmit(e)}
           >

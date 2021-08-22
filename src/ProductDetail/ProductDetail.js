@@ -53,7 +53,7 @@ const ProductDetail = () => {
             return (
               <div className="column is-half" key={index}>
                 <figure className="image is-3by4">
-                  <img src={src} />
+                  <img src={src} alt="description text" />
                 </figure>
               </div>
             );

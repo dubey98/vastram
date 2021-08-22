@@ -13,6 +13,7 @@ import ProductDetail from "./ProductDetail/ProductDetail";
 import { useAuth } from "./auth/use-auth";
 import WishList from "./components/WishList/WishList";
 import CheckOut from "./checkout/CheckOut";
+import HomePage from "./HomePage/HomePage";
 
 function App() {
   const auth = useAuth();
@@ -35,6 +36,9 @@ function App() {
 
         <main className="block">
           <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
             <Route path="/shop/search">
               <ProductList />
             </Route>
@@ -69,7 +73,7 @@ function App() {
                 <Error statusCode={403} />
               </Route>
             )}
-            <Route path="/">
+            <Route path="/shop/">
               <ProductList />
             </Route>
 

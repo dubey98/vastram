@@ -1,64 +1,115 @@
 import React, { useState, useEffect } from "react";
 import { getFrontPageData } from "./../services/service";
-import BrandCard from "./../components/BrandCards/BrandCards";
-import index1 from "./index1.webp";
-import index2 from "./index2.jpg";
-import index3 from "./index3.jpg";
 import { Link } from "react-router-dom";
+import Loading from "../components/Loading/Loading";
+import ImageTile from "../components/ImageTile";
+import FrontPageBrandCards from "../components/FrontPageBrandCards";
 
-const ShopFront = (props) => {
-  const [data, setData] = useState({ hits: [] });
-  const images = [index2, index3, index1];
-  const brandCardData = {
-    src: "https://bulma.io/images/placeholders/1280x960.png",
-    imageAlt: "placeholder Image",
-    brandName: "sample brandname",
-    helpText: "this is a sample heptext",
-  };
+const ShopFront = ({ category }) => {
+  const [loading, setLoading] = useState(true);
+  const [tileOneImages, setTileOneImages] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [brandCardsData, setBrandCardsData] = useState([]);
+  const [heroData, setHeroData] = useState(null);
 
   useEffect(() => {
-    let ignore = false;
-
     async function fetchData() {
-      if (!ignore) {
-        console.log("making a request");
-        const result = await getFrontPageData(props.category);
-        console.log(result.data, "Shopfront.js line 15");
-        setData(result.data);
+      const result = await getFrontPageData("men");
+      if (result.success) {
+        setTileOneImages(result.tileOneImages);
+        setCategories(result.categories);
+        setBrandCardsData(result.brandCardsData);
+        setHeroData(result.herodata);
+        setLoading(false);
       }
     }
-
     fetchData();
+  }, [category]);
 
-    return () => {
-      ignore = true;
-    };
-  }, [props.category]);
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>
-      {images.map((value, index) => {
-        return (
-          <Link to={"/shop/search"} key={index}>
-            <section
-              className="hero bg-img block is-fullheight-with-navbar"
-              style={{ backgroundImage: `url(${value})` }}
-              key={index}
-            ></section>
-          </Link>
-        );
-      })}
-      <div className="container">
-        <section className="columns">
-          <BrandCard {...brandCardData} />
-          <BrandCard {...brandCardData} />
-          <BrandCard {...brandCardData} />
-          <BrandCard {...brandCardData} />
-          <BrandCard {...brandCardData} />
+      <div className="container block">
+        <section className="block hero is-halfheight">
+          <div className="tile is-ancestor">
+            <div className="tile is-parent is-4">
+              <ImageTile data={tileOneImages[0]} />
+            </div>
+            <div className="tile is-vertical">
+              <div className="tile is-parent">
+                <ImageTile data={tileOneImages[1]} />
+              </div>
+              <div className="tile">
+                <div className="tile is-parent">
+                  <ImageTile data={tileOneImages[2]} />
+                </div>
+                <div className="tile is-parent">
+                  <ImageTile data={tileOneImages[3]} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="block hero is-large">
+          <div className="content has-text-left is-size-3 has-text-weight-semibold is-uppercase">
+            Explore Categories
+          </div>
+          <div className="columns is-multiline">
+            {mapCategories(categories, category)}
+          </div>
+        </section>
+        <section className="block hero is-large">
+          <div className="content has-text-left is-size-3 has-text-weight-semibold is-uppercase">
+            Explore your favourite brands
+          </div>
+          <div className="columns  is-multiline">
+            {brandCardsData.map((data, index) => (
+              <FrontPageBrandCards data={data} key={index} />
+            ))}
+          </div>
         </section>
       </div>
+      <section
+        className="block hero is-fullheight-with-navbar bg-img"
+        style={{ backgroundImage: `url(${heroData.src})` }}
+      ></section>
     </div>
   );
 };
+
+function mapCategories(categories, category) {
+  let categoryComponents = [];
+  let index = 0;
+  for (let [link, linkName] of Object.entries(categories)) {
+    let tempComponent = (
+      <div
+        className="column is-2-widescreen is-3-desktop is-one-quarter-tablet is-half-mobile"
+        key={index}
+      >
+        <Link to={"/shop/search?category=" + category + "&subcategory=" + link}>
+          <div
+            className="box content is-uppercase has-text-centered has-fullheight-content is-shadowless"
+            onMouseEnter={(e) =>
+              (e.target.className =
+                "box is-uppercase has-text-centered has-fullheight-content")
+            }
+            onMouseLeave={(e) => {
+              e.target.className =
+                "box is-uppercase has-text-centered has-fullheight-content is-shadowless";
+            }}
+          >
+            {linkName}
+          </div>
+        </Link>
+      </div>
+    );
+    index++;
+    categoryComponents.push(tempComponent);
+  }
+  return categoryComponents;
+}
 
 export default ShopFront;
