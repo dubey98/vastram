@@ -37,9 +37,9 @@ const HomePage = ({ category }) => {
           style={{ backgroundImage: `url(${imagesData[0].src})` }}
         ></section>
       </Link>
-      <section className="container hero block pt-6 pb-6">
+      <section className="container hero is-halfheight block pt-6 pb-6">
         <p className="is-uppercase p-2 has-text-weight-semibold is-size-3">
-          featured brands
+          have a look!
         </p>
         <div className="columns p-2 is-multiline is-centered">
           {mapBrandCardData(brandCardData)}

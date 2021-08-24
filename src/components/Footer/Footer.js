@@ -2,6 +2,7 @@ import React from "react";
 import "./Footer.css";
 import google_play from "./google_play.png";
 import apple_store from "./apple_store.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -12,11 +13,21 @@ const Footer = () => {
             <li>
               <strong>Online Shopping</strong>
             </li>
-            <li>Men</li>
-            <li>Women</li>
-            <li>Kids</li>
-            <li>Home & Living</li>
-            <li>Beauty</li>
+            <li>
+              <Link to="/shop/men">Men</Link>
+            </li>
+            <li>
+              <Link to="/shop/women">Women</Link>
+            </li>
+            <li>
+              <Link to="/shop/kids">Kids</Link>
+            </li>
+            <li>
+              <Link to="/shop/homeandliving">Home & Living</Link>
+            </li>
+            <li>
+              <Link to="/shop/beauty">Beauty</Link>
+            </li>
           </ul>
         </div>
         <div className="column">
@@ -24,13 +35,28 @@ const Footer = () => {
             <li>
               <strong>Useful links</strong>
             </li>
-            <li>vastram home</li>
-            <li>Signup</li>
-            <li>Login</li>
-            <li>Try new things</li>
-            <li>your profile</li>
-            <li>Orders</li>
-            <li>Wishlist</li>
+            <li>
+              <Link to="/">vastram home</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/auth/signup">Signup</Link>{" "}
+            </li>
+            <li>
+              <Link to="/auth/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/shop/products">Try new things</Link>
+            </li>
+            <li>
+              <Link to="/user">your profile</Link>
+            </li>
+            <li>
+              <Link to="/user/orders">Orders</Link>
+            </li>
+            <li>
+              <Link to="/wishlist">Wishlist</Link>
+            </li>
           </ul>
         </div>
         <div className="column">

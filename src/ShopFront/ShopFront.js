@@ -14,7 +14,7 @@ const ShopFront = ({ category }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await getFrontPageData("men");
+      const result = await getFrontPageData(category || "men");
       if (result.success) {
         setTileOneImages(result.tileOneImages);
         setCategories(result.categories);

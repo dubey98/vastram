@@ -1,4 +1,4 @@
-function Filter({ filterCategory, filterList, handleFilterChange }) {
+function Filter({ filterCategories, filterList, handleFilterChange }) {
   function mapFilterValues(category) {
     let filters = [];
     for (let i = 0; i < filterList.length; i++) {
@@ -17,7 +17,18 @@ function Filter({ filterCategory, filterList, handleFilterChange }) {
                 )
               }
             />
-            {filterList[i].value}
+            <span
+              className="is-clickable"
+              onClick={() =>
+                handleFilterChange(
+                  filterList[i].category,
+                  filterList[i].value,
+                  !filterList[i].checked
+                )
+              }
+            >
+              {filterList[i].display}
+            </span>
           </div>
         );
         filters.push(filter);
@@ -28,12 +39,14 @@ function Filter({ filterCategory, filterList, handleFilterChange }) {
 
   return (
     <div>
-      {filterCategory.map((category, index) => {
+      {filterCategories.map((category, index) => {
         return (
-          <div key={index}>
-            <div className="has-text-weight-bold is-uppercase">{category}</div>
-            <div className="has-text-weight-medium">
-              {mapFilterValues(category)}
+          <div key={index} className="block">
+            <div className="has-text-weight-bold is-uppercase pb-2">
+              {category.display}
+            </div>
+            <div className="has-text-weight-medium is-size-7">
+              {mapFilterValues(category.category)}
             </div>
           </div>
         );

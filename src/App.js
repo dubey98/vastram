@@ -14,6 +14,7 @@ import { useAuth } from "./auth/use-auth";
 import WishList from "./components/WishList/WishList";
 import CheckOut from "./checkout/CheckOut";
 import HomePage from "./HomePage/HomePage";
+import User from "./User/User";
 
 function App() {
   const auth = useAuth();
@@ -49,6 +50,9 @@ function App() {
                 </Route>
               );
             })}
+            <Route path="/shop/products">
+              <ProductList />
+            </Route>
             <Route path="/shop/:productId">
               <ProductDetail />
             </Route>
@@ -73,10 +77,10 @@ function App() {
                 <Error statusCode={403} />
               </Route>
             )}
-            <Route path="/shop/">
-              <ProductList />
-            </Route>
 
+            <Route path="/user/">
+              <User />
+            </Route>
             <Route path="*">
               <Error />
             </Route>

@@ -4,40 +4,64 @@ import ProductCard from "../components/ProductCard/ProductCard";
 import { getProductList } from "./../services/service";
 import { getFilters } from "./../services/service";
 import Filter from "./../components/Filter/Filter";
-import { useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import qs from "qs";
 
-const ProductList = ({ category, filters }) => {
-  const params = useParams();
+const ProductList = () => {
   const location = useLocation();
-  console.log(params);
-  console.log(location);
+  const history = useHistory();
   const [products, setProducts] = useState([]);
   const [filterList, setFilterList] = useState([]);
-  const [filterCategory, setFilterCategory] = useState([]);
+  const [filterCategories, setFilterCategories] = useState([]);
   const [filtersLoading, setFiltersLoading] = useState(true);
   const [sortBy, setSortBy] = useState("Relevance");
 
   useEffect(() => {
-    async function fetchProductData() {
-      const data = {
-        filters: null,
-      };
-      const result = await getProductList(data);
-      setProducts(result.data.products);
-    }
-    fetchProductData();
-
+    const queryString = location.search.toString().replace("?", "");
+    const activeFilters = Object.values(qs.parse(queryString));
     async function fetchFilterData() {
       const result = await getFilters();
       if (result.success) {
-        setFilterList(result.data.filterList);
-        setFilterCategory(result.data.filterCategory);
+        const tempFilterList = result.data.filterList.map((filter) => {
+          if (
+            activeFilters.find((activeFilter) => {
+              return (
+                activeFilter.category === filter.category &&
+                activeFilter.value === filter.value
+              );
+            })
+          ) {
+            filter.checked = true;
+            return filter;
+          } else return filter;
+        });
+        setFilterList(tempFilterList);
+        setFilterCategories(result.data.filterCategories);
         setFiltersLoading(false);
       }
     }
 
     fetchFilterData();
-  }, []);
+  }, [location.search]);
+
+  useEffect(() => {
+    async function fetchProductData() {
+      const filters = filterList
+        .filter((filter) => {
+          return filter.checked === true;
+        })
+        .map((activefilter) => {
+          return {
+            category: activefilter.category,
+            value: activefilter.value,
+          };
+        });
+      history.push("/shop/products?" + qs.stringify(filters));
+      const result = await getProductList(filters);
+      setProducts(result.data.products);
+    }
+    fetchProductData();
+  }, [filterList, history]);
 
   function handleFilterChange(filterCategory, filterValue, filterActive) {
     const tempFilterList = [...filterList];
@@ -109,7 +133,7 @@ const ProductList = ({ category, filters }) => {
               <Loading />
             ) : (
               <Filter
-                filterCategory={filterCategory}
+                filterCategories={filterCategories}
                 filterList={filterList}
                 handleFilterChange={handleFilterChange}
               />

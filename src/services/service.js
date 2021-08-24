@@ -16,7 +16,7 @@ export async function getProductDetails(id) {
 export async function getProductList(data) {
   return await service.get("shop/products", {
     params: {
-      data: data,
+      filters: data,
     },
     paramsSerializer: (params) => {
       return qs.stringify(params);
