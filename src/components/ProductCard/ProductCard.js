@@ -1,44 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./ProductCard.scss";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import { addProductToFavourites } from "./../../services/service";
+import {
+  addProductToFavourites,
+  checkIfWishlisted,
+} from "./../../services/service";
+import { FavoriteBorderOutlined, FavoriteOutlined } from "@material-ui/icons";
 
-const ProductCard = (props) => {
-  const { id, src, imageAlt, name, description, offerPrice, mrp } =
-    props.product;
-  const [favoriteIconSize, setFavoriteIconSize] = useState("24px");
-
-  function handleFavoriteHover(event = true) {
-    event ? setFavoriteIconSize("28px") : setFavoriteIconSize("24px");
-  }
+const ProductCard = ({ product, fromWishList }) => {
+  const { id, src, imageAlt, name, description, offerPrice, mrp } = product;
+  const [infocus, setInfocus] = useState(false);
+  const [favclicked, setFavclicked] = useState(false);
 
   async function handleFavoriteClick() {
-    const result = await addProductToFavourites(id);
-    console.log(result);
+    setFavclicked(true);
+    await addProductToFavourites(id);
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await checkIfWishlisted(id);
+      if (result.success) {
+        if (result.wishlisted) {
+          setFavclicked(true);
+        } else {
+          setFavclicked(false);
+        }
+      }
+    }
+    fetchData();
+  }, [id]);
+
+  function showWishListButton() {
+    if (infocus && !fromWishList) {
+      return (
+        <div
+          className="p-2 has-text-centered is-clickable box is-shadowless"
+          style={{
+            zIndex: 1,
+            position: "absolute",
+            bottom: "0rem",
+            width: "100%",
+          }}
+          onClick={() => handleFavoriteClick()}
+        >
+          <div className="icon is-small is-right">
+            {favclicked ? <FavoriteOutlined /> : <FavoriteBorderOutlined />}
+            wishlist
+          </div>
+        </div>
+      );
+    }
   }
 
   return (
-    <div className="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet">
-      <div className="card">
-        <div className="card-image">
+    <div className="column is-2-fullhd is-one-fifth-widescreen is-one-quarter-desktop is-one-third-tablet is-half-mobile">
+      <div
+        className="card"
+        onMouseEnter={() => setInfocus(true)}
+        onMouseLeave={() => setInfocus(false)}
+      >
+        <div className="card-image is-relative">
           <figure className="image is-4by5">
-            <span
-              onMouseEnter={(e) => handleFavoriteHover(true)}
-              onMouseLeave={() => handleFavoriteHover(false)}
-              onClick={async () => await handleFavoriteClick()}
-            >
-              <FavoriteIcon
-                className="is-overlay m-2 is-clickable"
-                style={{
-                  zIndex: "1",
-                  fill: "red",
-                  fontSize: favoriteIconSize,
-                }}
-              />
-            </span>
             <img src={src} alt={imageAlt} />
           </figure>
+          {showWishListButton()}
         </div>
         <Link to={`/shop/${id}`}>
           <div className="card-content">
@@ -52,7 +78,7 @@ const ProductCard = (props) => {
               </span>
               <br />
               <span className="has-text-weight-semibold">
-                Rs.{offerPrice}/-{" "}
+                Rs.{offerPrice}/-
                 <span className="has-text-weight-light has-text-crossed is-italic">
                   Rs. {mrp}/-
                 </span>

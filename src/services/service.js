@@ -10,13 +10,17 @@ export async function getFrontPageData(category) {
 }
 
 export async function getProductDetails(id) {
-  return await service.get("/shop/" + id.toString());
+  return await service
+    .get("/shop/" + id.toString())
+    .then((result) => result.data);
 }
 
-export async function getProductList(data) {
+export async function getProductList(data, limit, offset) {
   return await service.get("shop/products", {
     params: {
       filters: data,
+      limit: limit,
+      offset: offset,
     },
     paramsSerializer: (params) => {
       return qs.stringify(params);
@@ -58,4 +62,10 @@ export async function createNewAddress(data) {
     .post("user/address", data)
     .then((result) => result.data)
     .catch((result) => result.error);
+}
+
+export async function checkIfWishlisted(id) {
+  return await service
+    .get("user/favourite/check/" + id.toString())
+    .then((result) => result.data);
 }

@@ -16,8 +16,7 @@ const ProductDetail = () => {
   useEffect(() => {
     async function fetchData() {
       const result = await getProductDetails(productId);
-      console.log(result.data.data);
-      setData(result.data.data);
+      setData(result.product);
       setLoading(false);
     }
 
@@ -61,7 +60,7 @@ const ProductDetail = () => {
         </div>
       </div>
       <div className="column is-half content">
-        <div className="is-size-4 has-text-weight-semibold">
+        <div className="is-size-3 has-text-weight-semibold">
           {data.brandName}
         </div>
         <div className="is-size-5 has-text-weight-light">
@@ -102,7 +101,7 @@ const ProductDetail = () => {
           </div>
         </div>
         <div>
-          <div className="has-text-weight-semibold is-size-4 is-uppercase pt-2 pb-1">
+          <div className="has-text-weight-semibold is-size-5 is-uppercase pt-2 pb-1">
             Product details
           </div>
           <div>{data.summary}</div>

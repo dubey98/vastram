@@ -9,7 +9,6 @@ const WishList = (props) => {
   useEffect(() => {
     async function fetchData() {
       const result = await getFavouriteList(userId);
-      console.log(result.data.products);
       setProducts(result.data.products);
     }
     fetchData();
@@ -19,7 +18,9 @@ const WishList = (props) => {
     <div className="container">
       <div className="columns is-multiline is-10  m-0 ">
         {products.map((product, index) => {
-          return <ProductCard product={product} key={index} />;
+          return (
+            <ProductCard product={product} fromWishList={true} key={index} />
+          );
         })}
       </div>
     </div>

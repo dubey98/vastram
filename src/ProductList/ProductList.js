@@ -5,8 +5,10 @@ import { getProductList } from "./../services/service";
 import { getFilters } from "./../services/service";
 import Filter from "./../components/Filter/Filter";
 import { useHistory, useLocation } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import Pagination from "../components/Pagination/Pagination";
 import qs from "qs";
-
+// 1216 px
 const ProductList = () => {
   const location = useLocation();
   const history = useHistory();
@@ -15,6 +17,16 @@ const ProductList = () => {
   const [filterCategories, setFilterCategories] = useState([]);
   const [filtersLoading, setFiltersLoading] = useState(true);
   const [sortBy, setSortBy] = useState("Relevance");
+  const [reloadProduct, setReloadProduct] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+
+  const isMobile = useMediaQuery({ query: "(max-width : 767px)" });
+  const isTablet = useMediaQuery({ query: "(max-width : 1024px)" });
+  const isDesktop = useMediaQuery({ query: "(max-width : 1215px)" });
+  const isWideScreen = useMediaQuery({ query: "(max-width : 1410px)" });
+  const isFullHd = useMediaQuery({ query: "(min-width : 1410px)" });
 
   useEffect(() => {
     const queryString = location.search.toString().replace("?", "");
@@ -41,11 +53,13 @@ const ProductList = () => {
       }
     }
 
-    fetchFilterData();
+    fetchFilterData().then(() => setReloadProduct(!reloadProduct));
   }, [location.search]);
 
   useEffect(() => {
     async function fetchProductData() {
+      const limit = getRenderCount();
+      const offset = (currentPage - 1) * getRenderCount();
       const filters = filterList
         .filter((filter) => {
           return filter.checked === true;
@@ -56,12 +70,36 @@ const ProductList = () => {
             value: activefilter.value,
           };
         });
-      history.push("/shop/products?" + qs.stringify(filters));
-      const result = await getProductList(filters);
+      const result = await getProductList(filters, limit, offset);
       setProducts(result.data.products);
+      setLoading(false);
+      setTotalPage(Math.ceil(result.data.totalCount / getRenderCount()) || 1);
     }
     fetchProductData();
-  }, [filterList, history]);
+  }, [reloadProduct, currentPage]);
+
+  function getRenderCount() {
+    const renderedProductCount = {
+      mobile: 10,
+      tablet: 30,
+      desktop: 32,
+      widescreen: 35,
+      fullhd: 42,
+    };
+
+    Object.freeze(renderedProductCount);
+    if (isMobile) {
+      return renderedProductCount.mobile;
+    } else if (isTablet) {
+      return renderedProductCount.tablet;
+    } else if (isDesktop) {
+      return renderedProductCount.desktop;
+    } else if (isWideScreen) {
+      return renderedProductCount.widescreen;
+    } else if (isFullHd) {
+      return renderedProductCount.fullhd;
+    }
+  }
 
   function handleFilterChange(filterCategory, filterValue, filterActive) {
     const tempFilterList = [...filterList];
@@ -70,6 +108,18 @@ const ProductList = () => {
     });
     tempFilterList[index].checked = filterActive;
     setFilterList(tempFilterList);
+    const filters = filterList
+      .filter((filter) => {
+        return filter.checked === true;
+      })
+      .map((activefilter) => {
+        return {
+          category: activefilter.category,
+          value: activefilter.value,
+        };
+      });
+    history.push("/shop/products?" + qs.stringify(filters));
+    setReloadProduct(!reloadProduct);
   }
 
   function handleSortPreferenceChange(newPreference) {
@@ -109,7 +159,12 @@ const ProductList = () => {
     for (let filter of tempFilterList) {
       filter.checked = false;
     }
+    history.push("/shop/products");
     setFilterList(tempFilterList);
+  }
+
+  if (loading) {
+    return <Loading />;
   }
 
   return (
@@ -155,6 +210,12 @@ const ProductList = () => {
               return <ProductCard product={product} key={index} />;
             })}
           </div>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPage={totalPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </div>
     </div>
