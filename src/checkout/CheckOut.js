@@ -12,7 +12,7 @@ const CheckOut = () => {
   return (
     <orderContext.Provider value={order}>
       <div className="block">
-        <div className="columns has-text-centered">
+        <div className="columns has-text-centered is-mobile">
           <div className="column">Order</div>
           <div className="column">Address</div>
           <div className="column">Payment</div>

@@ -14,7 +14,7 @@ const NavbarDropDown = ({ burgerVisible }) => {
           <div
             className="navbar-item is-clickable"
             onClick={() =>
-              auth.user ? history.push("/user") : history.push("login")
+              auth.user ? history.push("/user") : history.push("/auth/login")
             }
           >
             {auth.user ? "Your Account" : "Login"}
@@ -22,7 +22,9 @@ const NavbarDropDown = ({ burgerVisible }) => {
           <div
             className="navbar-item is-clickable"
             onClick={() =>
-              auth.user ? history.push("/orders") : history.push("/signup")
+              auth.user
+                ? history.push("/user/orders")
+                : history.push("/auth/signup")
             }
           >
             {auth.user ? "Your orders" : "SignUp"}

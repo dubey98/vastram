@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function FrontPageBrandCards({ data }) {
   console.log(data);
   return (
-    <div className="column is-one-fifth-widescreen is-one-quarter-tablet is-half-mobile is-vcentered">
+    <div className="column is-one-fifth-widescreen is-one-quarter-tablet is-vcentered">
       <Link to={data.linkTo}>
         <div
           className="tile is-parent is-vertical has-background-light"

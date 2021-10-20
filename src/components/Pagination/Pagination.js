@@ -39,12 +39,12 @@ function Pagination({ currentPage, totalPage, setCurrentPage }) {
 
     function addEndWithEllipsis() {
       retPageList.push(
-        <li>
-          <span class="pagination-ellipsis">&hellip;</span>
+        <li key={"start1"}>
+          <span className="pagination-ellipsis">&hellip;</span>
         </li>
       );
       retPageList.push(
-        <li>
+        <li key={"start2"}>
           <button
             className={normalBtn}
             aria-label={"Go to Page" + totalPage.toString()}
@@ -58,7 +58,7 @@ function Pagination({ currentPage, totalPage, setCurrentPage }) {
 
     function addStartWithEllipsis() {
       retPageList.push(
-        <li>
+        <li key={"end1"}>
           <button
             className={normalBtn}
             aria-label={"Go to Page 1"}
@@ -69,8 +69,8 @@ function Pagination({ currentPage, totalPage, setCurrentPage }) {
         </li>
       );
       retPageList.push(
-        <li>
-          <span class="pagination-ellipsis">&hellip;</span>
+        <li key={"end2"}>
+          <span className="pagination-ellipsis">&hellip;</span>
         </li>
       );
     }

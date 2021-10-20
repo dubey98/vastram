@@ -1,4 +1,10 @@
-function Filter({ filterCategories, filterList, handleFilterChange }) {
+function Filter({
+  filterCategories,
+  filterList,
+  handleFilterChange,
+  showCollapseFilterButton,
+  handleExpandFilters,
+}) {
   function mapFilterValues(category) {
     let filters = [];
     for (let i = 0; i < filterList.length; i++) {
@@ -51,6 +57,15 @@ function Filter({ filterCategories, filterList, handleFilterChange }) {
           </div>
         );
       })}
+      {showCollapseFilterButton ? (
+        <div className="block">
+          <button className="button" onClick={(e) => handleExpandFilters(e)}>
+            Collapse filters
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

@@ -49,7 +49,6 @@ export async function addProductToFavourites(id) {
 }
 
 export async function getFavouriteList(userId) {
-  console.log({ userId });
   return await service.get("user/favourite/" + userId.toString());
 }
 

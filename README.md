@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# VASTRAM
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Vastram is an ecommerce application built wtih the help of react, bulma and supported with nodejs and express on the backend
 
-## Available Scripts
+## Build Stack
 
-In the project directory, you can run:
+Following libraries are used for building this project -
 
-### `npm start`
+- **React**: This app uses react to achieve superpowers. the whole website is broken down into standalone modular components, which are re-used.
+- **Axios**: Axios is used for fetching data from the backend. using axios implemented axios intercepter for intercepting request and attaching tokens to them.
+- **Bulma**: The frontend is designed using Bulma CSS only library.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The project uses react-hooks for maintaining state, react context for maintaining context for various self contained components.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Authentication
 
-### `npm test`
+Authentication is implemented with JWT, using axios interceptor, token is attached with outgoing request. all the components required for authentication live inside `/src/auth/`. A custom
+hook is implemented wrapping around the entire application so that we can instantiate and use authentication in any desired component.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Navigation
 
-### `npm run build`
+navigation around the app is built using react-router. as all the sensitive data is fetched after the component loads, and all request carry token with them, navidating to any protected route will not get you access to the data.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Listing products
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Products are listed using flexbox and columns, so the number of products we can fit on a page size is first determined using functions of the react-responsive library. This way, we only request the data we need and reduce bandwidth uses. We also determine the total number of products we can have to show the page numbers, determining which products will be displayed next.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+We also use client-side routing on the application. As we apply filters on the page, the address is updated to sync the displayed product list. This functionality makes the link shareable so that other users can land on the same list of products as you.
 
-### `npm run eject`
+From the list of products, a short description of the product, including price, is displayed. Clicking on the product takes you to the product detail page, where you can see the detailed summary of the product and add them to the cart.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Orders
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The complete order functionality is implemented under one order context to synchronize orders, addresses, and payments. You can modify your Order (such as quantity and items), and using the context, sync this with the Order total component. By using one context and updating data only when necessary, we save bandwidth.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## How to Install And Run
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+if you want to run this project locally. clone this repository and run `npm install` to install dependancies. run `npm start` to start the react app. you will also need the backend repository [ecom-backend](https://github.com/dubey98/ecom-backend) to have an endpoint for your frontend APIs. visit the github page for documentation on how to install this project.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+for your APIs to work on local server change the baseURL variable in `/src/services/axios.intercepter.js` to the URL where your backend is hosted.

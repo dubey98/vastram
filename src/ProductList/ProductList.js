@@ -10,7 +10,7 @@ import Pagination from "../components/Pagination/Pagination";
 import qs from "qs";
 // 1216 px
 const ProductList = () => {
-  const location = useLocation();
+  const queryString = useLocation().search.toString().replace("?", "");
   const history = useHistory();
   const [products, setProducts] = useState([]);
   const [filterList, setFilterList] = useState([]);
@@ -21,6 +21,7 @@ const ProductList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [filtersHidden, setFiltersHidden] = useState(true);
 
   const isMobile = useMediaQuery({ query: "(max-width : 767px)" });
   const isTablet = useMediaQuery({ query: "(max-width : 1024px)" });
@@ -29,7 +30,6 @@ const ProductList = () => {
   const isFullHd = useMediaQuery({ query: "(min-width : 1410px)" });
 
   useEffect(() => {
-    const queryString = location.search.toString().replace("?", "");
     const activeFilters = Object.values(qs.parse(queryString));
     async function fetchFilterData() {
       const result = await getFilters();
@@ -54,11 +54,12 @@ const ProductList = () => {
     }
 
     fetchFilterData().then(() => setReloadProduct(!reloadProduct));
-  }, [location.search]);
+  }, [queryString]);
 
   useEffect(() => {
     async function fetchProductData() {
       const limit = getRenderCount();
+      console.log(limit);
       const offset = (currentPage - 1) * getRenderCount();
       const filters = filterList
         .filter((filter) => {
@@ -77,6 +78,8 @@ const ProductList = () => {
     }
     fetchProductData();
   }, [reloadProduct, currentPage]);
+
+  useEffect(() => {}, [isMobile]);
 
   function getRenderCount() {
     const renderedProductCount = {
@@ -163,6 +166,16 @@ const ProductList = () => {
     setFilterList(tempFilterList);
   }
 
+  function handleExpandFilters(e) {
+    if (filtersHidden) {
+      setFiltersHidden(false);
+      e.target.innerHtml = "Collapse Filters";
+    } else {
+      setFiltersHidden(true);
+      e.target.innerHtml = "Expand Filters";
+    }
+  }
+
   if (loading) {
     return <Loading />;
   }
@@ -175,8 +188,8 @@ const ProductList = () => {
           style={{ borderRight: "1px solid black" }}
         >
           <div>
-            <div className="columns">
-              <div className="column has-text-weight-bold ">Filters</div>
+            <div className="columns is-mobile">
+              <div className="column has-text-weight-bold">Filters</div>
               <div
                 className="is-clickable is-underlined column"
                 onClick={() => clearAllActiveFilters()}
@@ -186,11 +199,30 @@ const ProductList = () => {
             </div>
             {filtersLoading ? (
               <Loading />
+            ) : isMobile ? (
+              filtersHidden ? (
+                <button
+                  className="button"
+                  onClick={(e) => handleExpandFilters(e)}
+                >
+                  Expand filters
+                </button>
+              ) : (
+                <Filter
+                  filterCategories={filterCategories}
+                  filterList={filterList}
+                  handleFilterChange={handleFilterChange}
+                  showCollapseFilterButton={isMobile}
+                  handleExpandFilters={handleExpandFilters}
+                />
+              )
             ) : (
               <Filter
                 filterCategories={filterCategories}
                 filterList={filterList}
                 handleFilterChange={handleFilterChange}
+                showCollapseFilterButton={isMobile}
+                handleExpandFilters={handleExpandFilters}
               />
             )}
           </div>
@@ -205,7 +237,7 @@ const ProductList = () => {
               />
             </div>
           </div>
-          <div className="columns is-multiline ">
+          <div className="columns is-multiline">
             {products.map((product, index) => {
               return <ProductCard product={product} key={index} />;
             })}

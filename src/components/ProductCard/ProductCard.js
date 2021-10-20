@@ -54,7 +54,7 @@ const ProductCard = ({ product, fromWishList }) => {
   }
 
   return (
-    <div className="column is-2-fullhd is-one-fifth-widescreen is-one-quarter-desktop is-one-third-tablet is-half-mobile">
+    <div className="column is-2-fullhd is-one-fifth-widescreen is-one-quarter-desktop is-one-third-tablet">
       <div
         className="card"
         onMouseEnter={() => setInfocus(true)}
