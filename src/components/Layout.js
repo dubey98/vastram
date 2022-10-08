@@ -1,6 +1,6 @@
 import React from "react";
 
-import Navbar from "./Navbar";
+import Navbar from "./navbar/Navbar";
 import Footer from "./Footer";
 import { ThemeProvider } from "@mui/material";
 import useThemeContext from "../context/ThemeContext";

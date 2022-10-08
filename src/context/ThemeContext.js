@@ -21,10 +21,6 @@ const themeProvider = () => {
 
   const changeTheme = (_theme) => {
     if (Object.keys(themes).includes(_theme)) {
-      console.log(
-        "✋✋✋ ~ file: ThemeContext.js ~ line 21 ~ changeTheme ~ _theme",
-        _theme
-      );
       setTheme(themes[_theme]);
     }
   };
