@@ -10,6 +10,7 @@ import Divider from "@mui/material/Divider";
 import { styled } from "@mui/material/styles";
 import IconAndLogo from "./navbar/IconAndLogo";
 import Button from "@mui/material/Button";
+import Link from "next/link";
 
 import { pages } from "./../constants/constant";
 import Typography from "@mui/material/Typography";
@@ -32,12 +33,11 @@ const Footer = () => {
           </Box>
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ display: "block", color: "primary.light" }}
-              >
-                {page}
-              </Button>
+              <Link href={page.link} key={page.link}>
+                <Button sx={{ my: 2, display: "block" }}>
+                  {page.displayText}
+                </Button>
+              </Link>
             ))}
           </Box>
         </Box>

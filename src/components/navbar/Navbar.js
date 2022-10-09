@@ -15,6 +15,7 @@ import ThemeChanger from "./ThemeChanger";
 import IconAndLogo from "./IconAndLogo";
 import MobileMenu from "./MobileMenu";
 import { pages, settings } from "./../../constants/constant";
+import Link from "next/link";
 
 const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -39,12 +40,11 @@ const ResponsiveAppBar = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+              <Link href={page.link} key={page.link}>
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  {page.displayText}
+                </Button>
+              </Link>
             ))}
           </Box>
 
