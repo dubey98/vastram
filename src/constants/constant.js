@@ -6,5 +6,6 @@ const pages = [
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const drawerWidth = 200;
+const rupee = "₹";
 
-export { pages, settings, drawerWidth };
+export { pages, settings, drawerWidth, rupee };

@@ -2,7 +2,7 @@ import React from "react";
 
 import Navbar from "./navbar/Navbar";
 import Footer from "./Footer";
-import { ThemeProvider } from "@mui/material";
+import { ThemeProvider, Container } from "@mui/material";
 import useThemeContext from "../context/ThemeContext";
 
 const Layout = ({ children }) => {
@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
     <ThemeProvider theme={theme}>
       <div>
         <Navbar />
-        <main>{children}</main>
+        <Container maxWidth="xl">{children}</Container>
         <Footer />
       </div>
     </ThemeProvider>

@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 
 import { pages, drawerWidth } from "./../../constants/constant";
+import Link from "next/link";
 
 const MobileMenu = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -29,11 +30,13 @@ const MobileMenu = () => {
       <Divider />
       <List>
         {pages.map((item) => (
-          <ListItem key={item.link} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item.displayText} />
-            </ListItemButton>
-          </ListItem>
+          <Link href={item.link}>
+            <ListItem key={item.link} disablePadding>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={item.displayText} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Box>

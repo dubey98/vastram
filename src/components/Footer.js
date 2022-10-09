@@ -29,7 +29,7 @@ const Footer = () => {
       <Container maxWidth="xl">
         <Box sx={{ display: "flex", my: 2 }}>
           <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
-            <IconAndLogo />
+            <IconAndLogo showOnBoth={true} />
           </Box>
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             {pages.map((page) => (

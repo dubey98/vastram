@@ -4,8 +4,10 @@ import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import Link from "next/link";
 
-const IconAndLogo = ({ mobile }) => {
-  const display = mobile
+const IconAndLogo = ({ mobile, showOnBoth }) => {
+  const display = showOnBoth
+    ? "flex"
+    : mobile
     ? { xs: "flex", md: "none" }
     : { xs: "none", md: "flex" };
 
