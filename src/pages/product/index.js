@@ -1,15 +1,15 @@
 import React from "react";
 import MediaCard from "../../components/products/Card";
-
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
+import Filters from "../../components/products/Filters";
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   textAlign: "left",
-  marginTop: "20px",
   color: theme.palette.text.secondary,
 }));
 
@@ -23,11 +23,7 @@ const index = () => {
               display: { xs: "none", sm: "none", md: "block" },
             }}
           >
-            {Array.from(Array(6)).map((_, index) => (
-              <Grid item xs={2} key={index}>
-                <Item>xs</Item>
-              </Grid>
-            ))}
+            <Filters />
           </Box>
         </Grid>
 
