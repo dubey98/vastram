@@ -17,7 +17,7 @@ import Typography from "@mui/material/Typography";
 
 const Item = styled(Paper)(({ theme }) => ({
   width: "100%",
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "primary.dark",
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "lightblue",
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,

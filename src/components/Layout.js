@@ -12,7 +12,9 @@ const Layout = ({ children }) => {
     <ThemeProvider theme={theme}>
       <div>
         <Navbar />
-        <Container maxWidth="xl">{children}</Container>
+        <Container maxWidth="xl" sx={{ marginBottom: "2em", marginTop: "2em" }}>
+          {children}
+        </Container>
         <Footer />
       </div>
     </ThemeProvider>
