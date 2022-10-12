@@ -16,8 +16,8 @@ const Item = styled(Paper)(({ theme }) => ({
 const index = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container columns={{ xs: 2, sm: 12, md: 12 }}>
-        <Grid item md={2}>
+      <Grid container columns={{ xs: 2, sm: 12, md: 12, lg: 12 }}>
+        <Grid item md={3} lg={2}>
           <Box
             sx={{
               display: { xs: "none", sm: "none", md: "block" },
@@ -27,14 +27,14 @@ const index = () => {
           </Box>
         </Grid>
 
-        <Grid item md={10}>
+        <Grid item md={9} lg={10}>
           <Grid
             container
             spacing={{ xs: 1, md: 2 }}
-            columns={{ xs: 4, sm: 12, md: 12 }}
+            columns={{ xs: 4, sm: 12, md: 12, lg: 5 }}
           >
             {Array.from(Array(6)).map((_, index) => (
-              <Grid item xs={2} sm={4} md={3} key={index}>
+              <Grid item xs={2} sm={4} md={4} lg={1} key={index}>
                 <Item>
                   <MediaCard />
                 </Item>

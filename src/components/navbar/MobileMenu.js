@@ -30,8 +30,8 @@ const MobileMenu = () => {
       <Divider />
       <List>
         {pages.map((item) => (
-          <Link href={item.link}>
-            <ListItem key={item.link} disablePadding>
+          <Link href={item.link} key={item.link}>
+            <ListItem disablePadding>
               <ListItemButton sx={{ textAlign: "center" }}>
                 <ListItemText primary={item.displayText} />
               </ListItemButton>
