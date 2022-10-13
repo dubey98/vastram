@@ -1,5 +1,5 @@
-import React from "react";
-import MediaCard from "../../components/products/Card";
+import React, { useState } from "react";
+import MediaCard from "../../components/products/MediaCard";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";

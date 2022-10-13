@@ -12,7 +12,7 @@ import Carousal, { CarousalItem } from "../common/Carousal";
 export default function MediaCard() {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <Link href="/product/1234">
+      <Box>
         {/* <CardMedia
           component="img"
           height="255"
@@ -27,16 +27,18 @@ export default function MediaCard() {
         <Carousal>
           {itemData.map((item) => (
             <CarousalItem key={item.img}>
-              <img
-                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
-                loading="lazy"
-              />
+              <Link href={"/product/1234"}>
+                <img
+                  src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                  srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                  alt={item.title}
+                  loading="lazy"
+                />
+              </Link>
             </CarousalItem>
           ))}
         </Carousal>
-      </Link>
+      </Box>
       <CardContent>
         <Box
           component="div"
