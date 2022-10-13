@@ -4,6 +4,7 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import { Stack, Pagination } from "@mui/material";
 
 import Filters from "../../components/products/Filters";
 
@@ -14,6 +15,13 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const index = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 100;
+
+  const handlePageChange = (e, value) => {
+    setCurrentPage(value);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container columns={{ xs: 2, sm: 12, md: 12, lg: 12 }}>
@@ -41,6 +49,18 @@ const index = () => {
               </Grid>
             ))}
           </Grid>
+          <Box py={2} display="flex" justifyContent={"center"}>
+            <Stack spacing={2}>
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+                variant="outlined"
+                siblingCount={0}
+              />
+            </Stack>
+          </Box>
         </Grid>
       </Grid>
     </Box>

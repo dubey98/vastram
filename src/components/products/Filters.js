@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Box,
+  Stack,
   Divider,
   Typography,
   Checkbox,
@@ -11,16 +12,15 @@ import {
 
 const Filters = () => {
   return (
-    <Box mr={2}>
+    <Stack divider={<Divider />} px={2} py={1} spacing={1}>
       <Typography variant="h6" component={"div"} fontWeight="semibold">
         FILTERS
       </Typography>
-      <Divider />
       <Filter />
       <Filter />
       <Filter />
       <Filter />
-    </Box>
+    </Stack>
   );
 };
 
@@ -28,7 +28,7 @@ const label = { inputProps: { "aria-label": "CheckBox Demo" } };
 
 const Filter = () => {
   return (
-    <Box mb={1}>
+    <Box>
       <FormGroup>
         <Typography mt={1}>Category</Typography>
         <FormControlLabel
@@ -43,7 +43,6 @@ const Filter = () => {
           label={<Typography fontSize={"small"}>World</Typography>}
         />
       </FormGroup>
-      <Divider />
     </Box>
   );
 };

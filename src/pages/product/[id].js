@@ -7,7 +7,7 @@ import Carousal, { CarousalItem } from "../../components/common/Carousal";
 const Product = () => {
   return (
     <Box sx={{}}>
-      <Carousal>
+      <Carousal enableButtons={false}>
         {itemData.map((item) => (
           <CarousalItem key={item.img}>
             <img
