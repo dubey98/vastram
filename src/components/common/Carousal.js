@@ -3,10 +3,9 @@ import { Box, Button, IconButton, MobileStepper } from "@mui/material";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import SwipeableViews from "react-swipeable-views";
-import { width } from "@mui/system";
 
 const buttonStyle = {
-  border: "1px solid rgba(0,0,0,0.4)",
+  // border: "1px solid rgba(0,0,0,0.4)",
   position: "absolute",
   top: "calc(50% - 18px)",
   zIndex: "tooltip",
@@ -25,7 +24,7 @@ const Carousal = ({ children, enableButtons }) => {
   };
 
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box sx={{ position: "relative", height: "100%" }} id="1">
       {enableButtons && (
         <IconButton
           color="primary"
@@ -45,22 +44,18 @@ const Carousal = ({ children, enableButtons }) => {
           whiteSpace: "nowrap",
           overflow: "hidden",
           width: "100%",
+          height: "100%",
         }}
       >
-        {/* <Box
-          sx={{
-            transform: `translateX(-${index}00%)`,
-          }}
-          component="div"
-        > */}
         <SwipeableViews
           index={index}
           onChangeIndex={handleIndexChange}
           enableMouseEvents
+          containerStyle={{ height: "100%" }}
+          style={{ height: "100%" }}
         >
           {children}
         </SwipeableViews>
-        {/* </Box> */}
       </Box>
 
       {enableButtons && (
@@ -90,21 +85,32 @@ const Carousal = ({ children, enableButtons }) => {
           steps={totalChildren}
           activeStep={index}
           position="static"
-          sx={{ backgroundColor: "transparent", color: "white" }}
+          // sx={{
+          // background: "transparent",
+          //   "& .MuiMobileStepper-dot": {
+          //     color: "yellow",
+          //   },
+          //   "& .MuiMobileStepper-dotActive": {
+          //     backgroundColor: "white",
+          //   },
+          // }}
         />
       </Box>
     </Box>
   );
 };
 
-export const CarousalItem = ({ children }) => {
+export const CarousalItem = ({ children, height, width }) => {
   return (
     <Box
       sx={{
         display: "inline-block",
-        width: "100%",
+        height: height || "100%",
+        width: width || "100%",
         textAlign: "center",
+        overflow: "hidden",
       }}
+      id="CarousalItem"
     >
       {children}
     </Box>
