@@ -85,15 +85,9 @@ const Carousal = ({ children, enableButtons }) => {
           steps={totalChildren}
           activeStep={index}
           position="static"
-          // sx={{
-          // background: "transparent",
-          //   "& .MuiMobileStepper-dot": {
-          //     color: "yellow",
-          //   },
-          //   "& .MuiMobileStepper-dotActive": {
-          //     backgroundColor: "white",
-          //   },
-          // }}
+          sx={{
+            background: "transparent",
+          }}
         />
       </Box>
     </Box>
@@ -105,7 +99,7 @@ export const CarousalItem = ({ children, height, width }) => {
     <Box
       sx={{
         display: "inline-block",
-        height: height || "100%",
+        height: height || "95%",
         width: width || "100%",
         textAlign: "center",
         overflow: "hidden",

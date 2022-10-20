@@ -1,36 +1,59 @@
 import * as React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { Box } from "@mui/system";
 import Carousal, { CarousalItem } from "../../components/common/Carousal";
+import { Box } from "@mui/material";
+import ProductTitle from "../../components/products/Producttitle";
+import SizeDetails from "../../components/products/SizeDetails";
 
 const Product = () => {
   return (
-    <Box sx={{}}>
-      <Carousal enableButtons={false}>
-        {itemData.map((item) => (
-          <CarousalItem key={item.img}>
-            <img
-              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-          </CarousalItem>
-        ))}
-      </Carousal>
-      {/* <ImageList sx={{ width: "100%" }} cols={2} rowHeight={164}>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList> */}
+    <Box>
+      <Box
+        sx={{
+          display: { sm: "block", md: "none" },
+          height: "30em",
+        }}
+      >
+        <Carousal enableButtons={false}>
+          {itemData.map((item) => (
+            <CarousalItem key={item.img}>
+              <img
+                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={item.title}
+                loading="lazy"
+                style={{
+                  objectFit: "contain",
+                  objectPosition: "center",
+                  height: "100%",
+                  width: "100%",
+                }}
+              />
+            </CarousalItem>
+          ))}
+        </Carousal>
+      </Box>
+      <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
+        <ImageList sx={{ width: "100%" }} cols={2}>
+          {itemData.map((item) => (
+            <ImageListItem key={item.img}>
+              <img
+                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={item.title}
+                loading="lazy"
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </Box>
+      <Box>
+        <ProductTitle />
+      </Box>
+      <Box>
+        <SizeDetails />
+      </Box>
     </Box>
   );
 };
