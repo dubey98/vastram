@@ -1,10 +1,10 @@
 import * as React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import Carousal, { CarousalItem } from "../../components/common/Carousal";
+import Carousal, { CarousalItem } from "/src/components/common/Carousal";
 import { Box } from "@mui/material";
-import ProductTitle from "../../components/products/Producttitle";
-import SizeDetails from "../../components/products/SizeDetails";
+import ProductTitle from "/src/components/products/Producttitle";
+import SizeDetails from "/src/components/products/SizeDetails";
 
 const Product = () => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 
-import useThemeContext from "../../context/ThemeContext";
+import useThemeContext from "/src/context/ThemeContext";
 import { IconButton } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";

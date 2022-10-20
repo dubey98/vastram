@@ -1,13 +1,12 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Box from "@mui/material/Box";
-import { rupee } from "../../constants/constant";
+import { rupee } from "@/constants/constant";
 import Link from "next/link";
-import Carousal, { CarousalItem } from "../common/Carousal";
+import Carousal, { CarousalItem } from "@/components/common/Carousal";
 
 export default function MediaCard() {
   return (

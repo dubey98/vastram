@@ -11,7 +11,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { pages, drawerWidth } from "./../../constants/constant";
+import { pages, drawerWidth } from "@/constants/constant";
 import Link from "next/link";
 
 const MobileMenu = () => {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Typography } from "@mui/material";
-import { rupee } from "../../constants/constant";
+import { rupee } from "@/constants/constant";
 
 const PriceTitle = () => {
   return (
