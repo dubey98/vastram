@@ -36,7 +36,13 @@ const ResponsiveAppBar = () => {
 
           <MobileMenu />
 
-          <IconAndLogo mobile={true} />
+          <Box
+            display={{ xs: "flex", md: "none" }}
+            justifyContent="center"
+            flexGrow={1}
+          >
+            <IconAndLogo mobile={true} />
+          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
