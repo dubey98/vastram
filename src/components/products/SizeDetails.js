@@ -8,7 +8,7 @@ const SizeDetails = () => {
   const theme = useTheme();
 
   return (
-    <Box>
+    <Box my={1}>
       <Box display="flex" justifyContent="space-between" my={2}>
         <Box>Select Size</Box>
         <Box>SIZE CHART</Box>
