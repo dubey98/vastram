@@ -49,4 +49,55 @@ const itemData = [
   },
 ];
 
-export { itemData };
+const reviewPerStars = [
+  {
+    star: 5,
+    reviews: 1345,
+    totalReviews: 5000,
+  },
+  {
+    star: 4,
+    reviews: 2345,
+    totalReviews: 5000,
+  },
+  {
+    star: 3,
+    reviews: 3345,
+    totalReviews: 5000,
+  },
+  {
+    star: 2,
+    reviews: 45,
+    totalReviews: 5000,
+  },
+  {
+    star: 1,
+    reviews: 135,
+    totalReviews: 5000,
+  },
+];
+
+const otherReviewFactors = [
+  {
+    rating: 3.9,
+    text: "Easy to assemble",
+    percentage: 85,
+  },
+  {
+    rating: 3.9,
+    text: "Easy to assemble, and this is epic",
+    percentage: 85,
+  },
+  {
+    rating: 3.9,
+    text: "Easy to assemble",
+    percentage: 85,
+  },
+  {
+    rating: 3.9,
+    text: "Easy to assemble",
+    percentage: 85,
+  },
+];
+
+export { itemData, reviewPerStars, otherReviewFactors };
