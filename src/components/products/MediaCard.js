@@ -10,7 +10,7 @@ import Carousal, { CarousalItem } from "@/components/common/Carousal";
 
 export default function MediaCard() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, minWidth:"150px" }}>
       <Box>
         {/* <CardMedia
           component="img"

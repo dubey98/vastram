@@ -1,7 +1,7 @@
 import React from "react";
 import AdbIcon from "@mui/icons-material/Adb";
 import Typography from "@mui/material/Typography";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import Link from "next/link";
 
 const IconAndLogo = ({ mobile, showOnBoth }) => {
@@ -13,8 +13,8 @@ const IconAndLogo = ({ mobile, showOnBoth }) => {
 
   return (
     <Link href="/">
-      <Box component="span" sx={{ display: "flex" }}>
-        <AdbIcon sx={{ display: display, mr: 1 }} />
+      <Stack direction="row" alignItems="center" gap={1}>
+        <AdbIcon sx={{ display: display }} />
         <Typography
           variant="h5"
           noWrap
@@ -33,7 +33,7 @@ const IconAndLogo = ({ mobile, showOnBoth }) => {
         >
           LOGO
         </Typography>
-      </Box>
+      </Stack>
     </Link>
   );
 };
