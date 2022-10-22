@@ -73,7 +73,7 @@ const Product = () => {
             >
               Add To Bag
             </Button>
-            <Link href="/cart">
+            <Link href="/checkout/cart">
               <Button
                 variant="contained"
                 startIcon={<FavoriteBorderIcon />}

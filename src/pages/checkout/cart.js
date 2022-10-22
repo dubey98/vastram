@@ -11,16 +11,6 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 const cart = () => {
   const theme = useTheme();
-  const { setTopNav, setFooter, setMobileLimitedMenu } = useGlobalContext();
-
-  useEffect(() => {
-    setFooter(false);
-    setMobileLimitedMenu("Back To Shopping");
-    return () => {
-      setFooter(true);
-      setMobileLimitedMenu();
-    };
-  }, []);
 
   return (
     <Container maxWidth="lg" sx={{ px: 0 }}>
@@ -83,6 +73,10 @@ const cart = () => {
       </Box>
     </Container>
   );
+};
+
+cart.getLayout = function getLayout(page) {
+  return page;
 };
 
 export default cart;
