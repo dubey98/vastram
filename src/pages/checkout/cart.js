@@ -8,6 +8,7 @@ import MediaCard from "@/components/products/MediaCard";
 import { PriceBreakUp } from "@/components/cartAndCheckout/PriceBreakUp";
 import { Container } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import CheckoutLayout from "@/components/CheckoutLayout";
 
 const cart = () => {
   const theme = useTheme();
@@ -76,7 +77,7 @@ const cart = () => {
 };
 
 cart.getLayout = function getLayout(page) {
-  return page;
+  return <CheckoutLayout>{page}</CheckoutLayout>;
 };
 
 export default cart;
