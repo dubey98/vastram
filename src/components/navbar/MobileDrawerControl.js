@@ -14,7 +14,7 @@ import {
 import { pages, drawerWidth } from "@/constants/constant";
 import Link from "next/link";
 
-const MobileMenu = () => {
+const MobileDrawerControl = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -46,7 +46,7 @@ const MobileMenu = () => {
     <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
       <IconButton
         size="large"
-        aria-label="account of current user"
+        aria-label="hamburger Icon"
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={handleDrawerToggle}
@@ -78,4 +78,4 @@ const MobileMenu = () => {
   );
 };
 
-export default MobileMenu;
+export default MobileDrawerControl;

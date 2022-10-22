@@ -11,14 +11,14 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 const cart = () => {
   const theme = useTheme();
-  const { setTopNav, setFooter } = useGlobalContext();
+  const { setTopNav, setFooter, setMobileLimitedMenu } = useGlobalContext();
 
   useEffect(() => {
-    setTopNav(false);
     setFooter(false);
+    setMobileLimitedMenu("Back To Shopping");
     return () => {
-      setTopNav(true);
       setFooter(true);
+      setMobileLimitedMenu();
     };
   }, []);
 
