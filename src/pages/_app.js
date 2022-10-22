@@ -6,6 +6,7 @@ import createEmotionCache from "../utility/createEmotionCache";
 import "../styles/globals.css";
 import Layout from "../components/Layout";
 import { ThemeContextProvider } from "../context/ThemeContext";
+import { GlobalContextProvider } from "src/context/GlobalContext";
 
 const ClientSideEmotionCache = createEmotionCache();
 
@@ -17,10 +18,12 @@ function MyApp({
   return (
     <CacheProvider value={emotionCache}>
       <ThemeContextProvider>
-        <Layout>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </Layout>
+        <GlobalContextProvider>
+          <Layout>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </Layout>
+        </GlobalContextProvider>
       </ThemeContextProvider>
     </CacheProvider>
   );

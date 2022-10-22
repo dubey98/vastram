@@ -12,6 +12,7 @@ import RatingSummary from "@/components/products/RatingSummary";
 import DelhiveryDetails from "@/components/products/DelhiveryDetails";
 import Reviews from "@/components/products/Reviews";
 import ProductList from "@/components/products/ProductList";
+import Link from "next/link";
 
 const Product = () => {
   return (
@@ -72,14 +73,16 @@ const Product = () => {
             >
               Add To Bag
             </Button>
-            <Button
-              variant="contained"
-              startIcon={<FavoriteBorderIcon />}
-              sx={{ ml: 1, width: "50%" }}
-              size="large"
-            >
-              WishList
-            </Button>
+            <Link href="/cart">
+              <Button
+                variant="contained"
+                startIcon={<FavoriteBorderIcon />}
+                sx={{ ml: 1, width: "50%" }}
+                size="large"
+              >
+                WishList
+              </Button>
+            </Link>
           </Box>
           <Divider />
           <DelhiveryDetails />

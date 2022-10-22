@@ -7,10 +7,11 @@ import Box from "@mui/material/Box";
 import { rupee } from "@/constants/constant";
 import Link from "next/link";
 import Carousal, { CarousalItem } from "@/components/common/Carousal";
+import { Paper } from "@mui/material";
 
 export default function MediaCard() {
   return (
-    <Card sx={{ maxWidth: 345, minWidth:"150px" }}>
+    <Paper variant="outlined" sx={{ maxWidth: 345, minWidth: "150px" }}>
       <Box>
         {/* <CardMedia
           component="img"
@@ -82,7 +83,7 @@ export default function MediaCard() {
           </Typography>
         </Box>
       </CardContent>
-    </Card>
+    </Paper>
   );
 }
 
