@@ -15,14 +15,20 @@ function MyApp({
   pageProps,
   emotionCache = ClientSideEmotionCache,
 }) {
+  const getLayout =
+    Component.getLayout ||
+    ((page) => (
+      <Layout>
+        <CssBaseline />
+        {page}
+      </Layout>
+    ));
+
   return (
     <CacheProvider value={emotionCache}>
       <ThemeContextProvider>
         <GlobalContextProvider>
-          <Layout>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </Layout>
+          {getLayout(<Component {...pageProps} />)}
         </GlobalContextProvider>
       </ThemeContextProvider>
     </CacheProvider>
