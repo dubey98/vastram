@@ -13,17 +13,30 @@ export const GlobalContextProvider = ({ children }) => {
   );
 };
 
+/**
+ *
+ * @returns
+ */
 const useGlobalContext = () => useContext(GlobalContext);
 
 function useGlobalContextProvider() {
   const [topNav, setTopNav] = useState(true);
   const [footer, setFooter] = useState(true);
+  const [mobileNav, setMobileNav] = useState(null);
+
+  const setMobileNavProperties = (heading) => {
+    if (heading) {
+      setMobileNav({ heading });
+    } else setMobileNav(null);
+  };
 
   return {
     topNav,
     footer,
+    mobileNav,
     setTopNav,
     setFooter,
+    setMobileNavProperties,
   };
 }
 

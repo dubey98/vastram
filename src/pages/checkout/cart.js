@@ -9,17 +9,26 @@ import { PriceBreakUp } from "@/components/cartAndCheckout/PriceBreakUp";
 import { Container } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import CheckoutLayout from "@/components/CheckoutLayout";
+import Link from "next/link";
 
 const cart = () => {
   const theme = useTheme();
+  const { setMobileNavProperties } = useGlobalContext();
+
+  useEffect(() => {
+    setMobileNavProperties("Shopping Bag");
+    return () => {
+      setMobileNavProperties();
+    };
+  }, []);
 
   return (
-    <Container maxWidth="lg" sx={{ px: 0 }}>
+    <Container maxWidth="lg">
       <Grid
         container
         columns={{ xs: 1, sm: 1, md: 3, lg: 4 }}
         spacing={2}
-        mx={0}
+        my={2}
         px={0}
       >
         <Grid item xs={1} sm={1} md={2} lg={3}>
@@ -66,9 +75,11 @@ const cart = () => {
           sx={{ top: "auto", bottom: 0 }}
         >
           <Toolbar>
-            <Button fullWidth color="inherit">
-              Place Order
-            </Button>
+            <Link href="/checkout/address">
+              <Button fullWidth color="inherit">
+                Place Order
+              </Button>
+            </Link>
           </Toolbar>
         </AppBar>
       </Box>

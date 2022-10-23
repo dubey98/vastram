@@ -18,9 +18,11 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import { pages, settings } from "@/constants/constant";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import useGlobalContext from "src/context/GlobalContext";
 
 const MobileTopNavBar = () => {
   const router = useRouter();
+  const { mobileNav } = useGlobalContext();
 
   const handleBackClick = () => {
     router.back();
@@ -30,14 +32,21 @@ const MobileTopNavBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <IconButton
-            onClick={handleBackClick}
-            color="inherit"
-            aria-controls="back Button"
-            aria-label="back button"
-          >
-            <ArrowBackOutlinedIcon />
-          </IconButton>
+          <Box display="flex" alignItems="center">
+            <IconButton
+              onClick={handleBackClick}
+              color="inherit"
+              aria-controls="back Button"
+              aria-label="back button"
+            >
+              <ArrowBackOutlinedIcon />
+            </IconButton>
+            <Box>
+              <Typography textTransform="uppercase">
+                {mobileNav ? mobileNav.heading : ""}
+              </Typography>
+            </Box>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
