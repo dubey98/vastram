@@ -100,4 +100,55 @@ const otherReviewFactors = [
   },
 ];
 
-export { itemData, reviewPerStars, otherReviewFactors };
+const addresses = [
+  {
+    id: 1,
+    name: "Shiv Dubey",
+    city: "Gurugram",
+    state: "Haryana",
+    pincode: "110011",
+    mobile: "9856741239",
+    locality: "Sector 21",
+    address: "House No 89, alpha centauri",
+    type: "home",
+    default: true,
+  },
+  {
+    id: 2,
+    name: "Shiv Dubey",
+    city: "Gurugram",
+    state: "Haryana",
+    pincode: "110011",
+    mobile: "9856741239",
+    locality: "Sector 21",
+    address: "House No 89, alpha centauri",
+    type: "home",
+    default: false,
+  },
+  {
+    id: 3,
+    name: "Shiv Dubey",
+    city: "Gurugram",
+    state: "Haryana",
+    pincode: "110011",
+    mobile: "9856741239",
+    locality: "Sector 21",
+    address: "House No 89, alpha centauri",
+    type: "home",
+    default: false,
+  },
+  {
+    id: 4,
+    name: "Shiv Dubey",
+    city: "Gurugram",
+    state: "Haryana",
+    pincode: "110011",
+    mobile: "9856741239",
+    locality: "Sector 21",
+    address: "House No 89, alpha centauri",
+    type: "home",
+    default: false,
+  },
+];
+
+export { itemData, reviewPerStars, otherReviewFactors, addresses };

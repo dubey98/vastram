@@ -1,9 +1,12 @@
-import React from 'react'
+import CheckoutLayout from "@/components/CheckoutLayout";
+import React from "react";
 
 const add = () => {
-  return (
-    <div>add</div>
-  )
-}
+  return <div>add</div>;
+};
 
-export default add
+add.getLayout = function (page) {
+  return <CheckoutLayout>{page}</CheckoutLayout>;
+};
+
+export default add;

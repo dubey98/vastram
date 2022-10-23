@@ -6,6 +6,7 @@ import PriceBreakUp from "@/components/cartAndCheckout/PriceBreakUp";
 import AddressView from "@/components/cartAndCheckout/AddressView";
 import DeliveryEstimates from "@/components/cartAndCheckout/DeliveryEstimates";
 import BottomAppBar from "@/components/cartAndCheckout/BottomAppBar";
+import Link from "next/link";
 
 const address = () => {
   const { setMobileNavProperties } = useGlobalContext();
@@ -20,6 +21,13 @@ const address = () => {
   return (
     <Box>
       <AddressView />
+      <Box>
+        <Link href="/checkout/address/list">
+          <Button variant="outlined" fullWidth>
+            change or add address
+          </Button>
+        </Link>
+      </Box>
       <Divider />
       <DeliveryEstimates />
       <Divider />
