@@ -1,15 +1,13 @@
 import react, { useEffect } from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import { Button, Typography, Box, Stack } from "@mui/material";
 import useGlobalContext from "src/context/GlobalContext";
 import { useTheme } from "@mui/material/styles";
 import MediaCard from "@/components/products/MediaCard";
-import { PriceBreakUp } from "@/components/cartAndCheckout/PriceBreakUp";
+import PriceBreakUp from "@/components/cartAndCheckout/PriceBreakUp";
 import { Container } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import CheckoutLayout from "@/components/CheckoutLayout";
-import Link from "next/link";
+import BottomAppBar from "@/components/cartAndCheckout/BottomAppBar";
 
 const cart = () => {
   const theme = useTheme();
@@ -69,19 +67,7 @@ const cart = () => {
       <Box p={2}></Box>
 
       <Box display={{ xs: "block", sm: "block", md: "none", lg: "none" }}>
-        <AppBar
-          position="fixed"
-          color="primary"
-          sx={{ top: "auto", bottom: 0 }}
-        >
-          <Toolbar>
-            <Link href="/checkout/address">
-              <Button fullWidth color="inherit">
-                Place Order
-              </Button>
-            </Link>
-          </Toolbar>
-        </AppBar>
+        <BottomAppBar buttonText="Place Order" href="/checkout/address" />
       </Box>
     </Container>
   );

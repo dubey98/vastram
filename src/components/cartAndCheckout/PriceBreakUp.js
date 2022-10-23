@@ -2,12 +2,12 @@ import React from "react";
 import { Button, Typography, Box, Divider } from "@mui/material";
 import { rupee } from "@/constants/constant";
 
-export const PriceBreakUp = () => {
+const PriceBreakUp = () => {
   const couponApplied = false;
   const convenienceFeeWaived = true;
 
   return (
-    <Box>
+    <Box my={1}>
       <Typography gutterBottom fontWeight="bold">
         Price Details
       </Typography>
@@ -51,7 +51,7 @@ export const PriceBreakUp = () => {
             <Typography
               mr={1}
               sx={{
-                textDecoration: convenienceFeeWaived ? "line-through" : ""
+                textDecoration: convenienceFeeWaived ? "line-through" : "",
               }}
             >
               {rupee}99
@@ -76,3 +76,5 @@ export const PriceBreakUp = () => {
     </Box>
   );
 };
+
+export default PriceBreakUp;
